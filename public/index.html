@@ -62,6 +62,153 @@
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
+        /* Clickable section styles */
+        .clickable-section {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .clickable-section:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .clickable-section::after {
+            content: "Click for comparison";
+            display: block;
+            text-align: center;
+            color: #4F46E5;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .clickable-section:hover::after {
+            opacity: 1;
+        }
+        
+        /* Comparison modal styles */
+        .comparison-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.8);
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+        
+        .comparison-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        /* Updated comparison modal styles */
+        .comparison-modal-content {
+            background-color: white;
+            border-radius: 0.5rem;
+            width: 90%;
+            max-width: 1200px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+        }
+        
+        /* Add styles for comparison tabs */
+        .comparison-tabs {
+            display: flex;
+            border-bottom: 1px solid #e5e7eb;
+            margin-bottom: 20px;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 5px;
+        }
+        
+        .comparison-tab {
+            padding: 8px 16px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            border-radius: 8px 8px 0 0;
+            transition: all 0.3s ease;
+            margin-right: 5px;
+            position: relative;
+        }
+        
+        .comparison-tab:hover {
+            background-color: #f3f4f6;
+        }
+        
+        .comparison-tab.active {
+            color: #4f46e5;
+            background-color: #f3f4f6;
+        }
+        
+        .comparison-tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: #4f46e5;
+            border-radius: 3px 3px 0 0;
+        }
+        
+        .comparison-view {
+            display: none;
+        }
+        
+        .comparison-view.active {
+            display: block;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        .comparison-modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: #f3f4f6;
+            border-radius: 50%;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .comparison-modal-close:hover {
+            background-color: #e5e7eb;
+        }
+        
+        .comparison-sides {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-sides {
+                grid-template-columns: 1fr;
+            }
+        }
+
         .nav-link {
             position: relative;
             transition: all 0.3s ease;
@@ -92,6 +239,16 @@
             width: 100%;
             height: 3px;
             background-color: #1e40af;
+        }
+
+        /* Nav scrollbar removal */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
         }
 
         .accordion-button {
@@ -135,6 +292,68 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
+        /* Vertical theme tracker styles */
+        .theme-tracker-vertical {
+            z-index: 40;
+            transition: opacity 0.3s ease;
+        }
+        
+        .theme-tracker-vertical:hover .theme-marker-vertical span {
+            opacity: 1;
+            transform: translateX(0);
+            visibility: visible;
+        }
+        
+        .theme-marker-vertical {
+            transition: all 0.3s ease;
+        }
+        
+        .theme-marker-vertical span {
+            opacity: 0;
+            transform: translateX(-10px);
+            transition: all 0.3s ease;
+            visibility: hidden;
+            white-space: nowrap;
+        }
+        
+        .theme-dot {
+            transition: all 0.3s ease;
+        }
+        
+        .theme-tracker-progress-vertical {
+            transition: height 0.4s ease;
+        }
+        
+        @media (max-width: 768px) {
+            .theme-tracker-vertical {
+                opacity: 0.6;
+                scale: 0.8;
+                left: -5px;
+            }
+            
+            .theme-marker {
+                display: none;
+                top: -24px;
+                font-size: 10px;
+                padding: 2px 6px;
+            }
+            
+            .theme-marker:nth-child(2),
+            .theme-marker:nth-child(4) {
+                display: block;
+            }
+
+            .theme-tracker {
+                height: 6px;
+                margin: 16px 0 8px 0;
+            }
+            
+            .nav-link {
+                font-size: 13px;
+                padding: 0 6px;
+            }
+        }
+
         .scroll-icon {
             opacity: 0;
             transform: translateY(20px);
@@ -166,9 +385,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #ccc;
+            background-color: #e5e7eb; /* Light gray for Classical Myth */
             transition: .4s;
             border-radius: 34px;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
         }
         
         .comparison-slider:before {
@@ -181,14 +401,88 @@
             background-color: white;
             transition: .4s;
             border-radius: 50%;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
         }
         
         input:checked + .comparison-slider {
-            background-color: #2563eb;
+            background-color: #2563eb; /* Blue for Disney's Version */
         }
         
         input:checked + .comparison-slider:before {
             transform: translateX(26px);
+        }
+
+        /* Updated toggle container with fixed width and better responsiveness */
+        .toggle-container {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+            position: relative;
+            padding: 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .toggle-label {
+            font-weight: 600;
+            white-space: nowrap;
+            line-height: 1;
+        }
+        
+        /* Fixed spacing for toggle labels */
+        @media (min-width: 768px) {
+            .toggle-label-left {
+                right: calc(50% + 40px);
+                position: absolute;
+                text-align: right;
+                width: 120px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .toggle-label-right {
+                left: calc(50% + 40px);
+                position: absolute;
+                text-align: left;
+                width: 120px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+            
+            .toggle-switch-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 0 20px;
+            }
+        }
+        
+        @media (max-width: 767px) {
+            .toggle-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+                padding: 15px 0;
+            }
+            
+            .toggle-switch-container {
+                order: 2;
+                margin: 5px 0;
+            }
+            
+            .toggle-label-left {
+                order: 1;
+            }
+            
+            .toggle-label-right {
+                order: 3;
+            }
+            
+            .toggle-label {
+                margin-bottom: 0;
+            }
         }
 
         .quote-box {
@@ -227,6 +521,145 @@
         .comparison-side {
             transition: all 0.5s ease;
         }
+
+        /* Card styles */
+        .info-card {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            margin-bottom: 16px;
+        }
+        
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            padding: 16px;
+            background: #f3f4f6;
+            font-weight: bold;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .card-content.expanded {
+            max-height: 1000px;
+            padding: 16px;
+        }
+
+        /* Toggle styles */
+        .myth-disney-toggle {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin: 8px 0;
+            padding: 8px 0;
+        }
+        
+        .toggle-label {
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+        
+        .toggle-label.active {
+            color: #2563eb;
+        }
+        
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 26px;
+            margin: 0 8px;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .toggle-slider {
+            background-color: #2563eb;
+        }
+        
+        input:checked + .toggle-slider:before {
+            transform: translateX(34px);
+        }
+        
+        .card-content-side {
+            transition: all 0.3s ease;
+        }
+        
+        .card-content-side.hidden-side {
+            display: none;
+        }
+
+        /* Comparison card clickable styles */
+        .comparison-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .comparison-card:hover::after {
+            content: "Click to compare";
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            color: #4F46E5;
+            font-size: 0.85rem;
+            font-weight: 500;
+            animation: fadeIn 0.3s ease forwards;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 4px 0;
+            border-radius: 0 0 8px 8px;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
@@ -240,33 +673,48 @@
     </header>
 
     <!-- Sticky Navigation -->
-    <nav class="sticky top-0 bg-white shadow-md z-50 py-4">
-        <div class="container mx-auto px-6">
+    <nav class="sticky top-0 bg-white shadow-md z-50 py-2">
+        <div class="container mx-auto px-4">
             <div class="flex flex-wrap justify-center md:justify-between items-center mb-2">
-                <div class="flex flex-wrap justify-center space-x-6 py-1">
-                    <a href="#selection" class="nav-link text-blue-600 hover:text-blue-800 px-1 py-1 font-medium">Selection</a>
-                    <a href="#source" class="nav-link text-blue-600 hover:text-blue-800 px-1 py-1 font-medium">Myth Source</a>
-                    <a href="#comparison" class="nav-link text-blue-600 hover:text-blue-800 px-1 py-1 font-medium">Myth vs. Movie</a>
-                    <a href="#preservation" class="nav-link text-blue-600 hover:text-blue-800 px-1 py-1 font-medium">Preservation</a>
-                    <a href="#adaptation" class="nav-link text-blue-600 hover:text-blue-800 px-1 py-1 font-medium">Adaptation</a>
-                    <a href="#interpretation" class="nav-link text-blue-600 hover:text-blue-800 px-1 py-1 font-medium">Interpretation</a>
-                    <a href="#apotheosis" class="nav-link text-blue-600 hover:text-blue-800 px-1 py-1 font-medium">Apotheosis</a>
-                    <a href="#gallery" class="nav-link text-blue-600 hover:text-blue-800 px-1 py-1 font-medium">Gallery</a>
-                    <a href="#faq" class="nav-link text-blue-600 hover:text-blue-800 px-1 py-1 font-medium">FAQ</a>
-                    <a href="#conclusion" class="nav-link text-blue-600 hover:text-blue-800 px-1 py-1 font-medium">Conclusion</a>
+                <div class="flex flex-nowrap justify-start overflow-x-auto w-full py-1 no-scrollbar" style="scrollbar-width: none; -ms-overflow-style: none;">
+                    <a href="#selection" class="nav-link text-blue-600 hover:text-blue-800 px-2 md:px-3 py-1 text-sm md:text-base whitespace-nowrap">Selection</a>
+                    <a href="#source" class="nav-link text-blue-600 hover:text-blue-800 px-2 md:px-3 py-1 text-sm md:text-base whitespace-nowrap">Myth Source</a>
+                    <a href="#comparison" class="nav-link text-blue-600 hover:text-blue-800 px-2 md:px-3 py-1 text-sm md:text-base whitespace-nowrap">Myth vs. Movie</a>
+                    <a href="#preservation" class="nav-link text-blue-600 hover:text-blue-800 px-2 md:px-3 py-1 text-sm md:text-base whitespace-nowrap">Preservation</a>
+                    <a href="#adaptation" class="nav-link text-blue-600 hover:text-blue-800 px-2 md:px-3 py-1 text-sm md:text-base whitespace-nowrap">Adaptation</a>
+                    <a href="#interpretation" class="nav-link text-blue-600 hover:text-blue-800 px-2 md:px-3 py-1 text-sm md:text-base whitespace-nowrap">Interpretation</a>
+                    <a href="#apotheosis" class="nav-link text-blue-600 hover:text-blue-800 px-2 md:px-3 py-1 text-sm md:text-base whitespace-nowrap">Apotheosis</a>
+                    <a href="#gallery" class="nav-link text-blue-600 hover:text-blue-800 px-2 md:px-3 py-1 text-sm md:text-base whitespace-nowrap">Gallery</a>
+                    <a href="#faq" class="nav-link text-blue-600 hover:text-blue-800 px-2 md:px-3 py-1 text-sm md:text-base whitespace-nowrap">FAQ</a>
+                    <a href="#conclusion" class="nav-link text-blue-600 hover:text-blue-800 px-2 md:px-3 py-1 text-sm md:text-base whitespace-nowrap">Conclusion</a>
+                    <a href="#sources" class="nav-link text-blue-600 hover:text-blue-800 px-2 md:px-3 py-1 text-sm md:text-base whitespace-nowrap">Sources</a>
                 </div>
-            </div>
-            
-            <!-- Theme Tracker -->
-            <div class="theme-tracker mt-2 md:block">
-                <div class="theme-tracker-progress" style="width: 10%"></div>
-                <div class="theme-marker bg-blue-700 text-white font-medium" style="left: 20%">Identity</div>
-                <div class="theme-marker bg-blue-700 text-white font-medium" style="left: 40%">Heroism</div>
-                <div class="theme-marker bg-blue-700 text-white font-medium" style="left: 65%">Apotheosis</div>
-                <div class="theme-marker bg-blue-700 text-white font-medium" style="left: 85%">Sacrifice</div>
             </div>
         </div>
     </nav>
+
+    <!-- Vertical Theme Tracker -->
+    <div class="theme-tracker-vertical fixed left-0 top-1/3 flex flex-col items-center">
+        <div class="theme-tracker-background h-60 w-2 bg-gray-200 rounded-full mx-4 relative">
+            <div class="theme-tracker-progress-vertical absolute top-0 w-full rounded-full bg-gradient-to-b from-blue-500 to-purple-500" style="height: 10%"></div>
+        </div>
+        <div class="theme-marker-vertical flex items-center" style="position: absolute; top: 20%; left: 12px;">
+            <div class="theme-dot w-4 h-4 rounded-full bg-blue-700"></div>
+            <span class="ml-2 bg-blue-700 text-white text-xs px-2 py-1 rounded">Identity</span>
+        </div>
+        <div class="theme-marker-vertical flex items-center" style="position: absolute; top: 40%; left: 12px;">
+            <div class="theme-dot w-4 h-4 rounded-full bg-gray-300"></div>
+            <span class="ml-2 bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded">Heroism</span>
+        </div>
+        <div class="theme-marker-vertical flex items-center" style="position: absolute; top: 65%; left: 12px;">
+            <div class="theme-dot w-4 h-4 rounded-full bg-gray-300"></div>
+            <span class="ml-2 bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded">Apotheosis</span>
+        </div>
+        <div class="theme-marker-vertical flex items-center" style="position: absolute; top: 85%; left: 12px;">
+            <div class="theme-dot w-4 h-4 rounded-full bg-gray-300"></div>
+            <span class="ml-2 bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded">Sacrifice</span>
+        </div>
+    </div>
 
     <!-- Main Content -->
     <main class="container mx-auto px-4 py-8">
@@ -291,10 +739,10 @@
                     <div class="swiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="https://lumiere-a.akamaihd.net/v1/images/p_hercules_1997_cover_0b0a1b0a.jpeg" alt="Hercules Movie Poster" class="rounded-lg">
+                                <img src="images/disney_hercules_movie_poster.jpg" alt="Hercules Movie Poster" class="rounded-lg">
                             </div>
                             <div class="swiper-slide">
-                                <img src="https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/07/hercules-disney.jpg" alt="Hercules Characters" class="rounded-lg">
+                                <img src="images/disney_hercules_megara.webp" alt="Hercules Characters" class="rounded-lg">
                             </div>
                         </div>
                         <div class="swiper-pagination"></div>
@@ -325,20 +773,40 @@
                             </ul>
                         </div>
                         
+                        <div class="bg-gray-50 p-4 rounded my-4">
+                            <h3 class="font-bold mb-2">The Twelve Labors:</h3>
+                            <ol class="list-decimal pl-5 space-y-1">
+                                <li>Slay the Nemean Lion</li>
+                                <li>Slay the Lernaean Hydra</li>
+                                <li>Capture the Ceryneian Hind</li>
+                                <li>Capture the Erymanthian Boar</li>
+                                <li>Clean the Augean Stables</li>
+                                <li>Defeat the Stymphalian Birds</li>
+                                <li>Capture the Cretan Bull</li>
+                                <li>Steal the Mares of Diomedes</li>
+                                <li>Obtain the Girdle of Hippolyta</li>
+                                <li>Steal the Cattle of Geryon</li>
+                                <li>Steal the Apples of the Hesperides</li>
+                                <li>Capture Cerberus</li>
+                            </ol>
+                        </div>
+                        
                         <div class="quote-box mt-6" data-quote>
                             <p class="italic">"Herakles, born of Zeus and mortal Alcmene, completed twelve labors as penance for killing his family in a madness sent by Hera."</p>
                             <p class="text-right mt-2 font-bold">— Classical Myth</p>
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Heracles_and_the_Hydra_MET_DP-14201-001.jpg/800px-Heracles_and_the_Hydra_MET_DP-14201-001.jpg" alt="Hercules and the Hydra" class="rounded-lg section-image">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Heracles_and_the_Nemean_Lion_MET_DP-14201-002.jpg/800px-Heracles_and_the_Nemean_Lion_MET_DP-14201-002.jpg" alt="Hercules and the Nemean Lion" class="rounded-lg section-image">
+                        <img src="images/hercules_and_hydra.jpg" alt="Hercules and the Hydra" class="rounded-lg section-image">
+                        <img src="images/hercules_lion.jpeg" alt="Hercules and the Nemean Lion" class="rounded-lg section-image">
+                        <img src="images/hercules_12_labors.jpg" alt="The Twelve Labors" class="w-full h-auto rounded-lg section-image">
+                        <img src="images/hercules_apotheosis.png" alt="Apotheosis of Herakles" class="w-full h-auto rounded-lg section-image">
                     </div>
                 </div>
             </div>
         </section>
-        
-        <!-- NEW SECTION: Myth vs. Movie Split Comparison Section -->
+
+        <!-- Section: Myth vs. Movie Comparison -->
         <section id="comparison" class="mb-16 opacity-0 transform translate-y-4 transition-all duration-700" data-section>
             <h2 class="text-3xl font-bold mb-6 text-blue-900 flex items-center">
                 <i class="fas fa-balance-scale mr-3 text-purple-600 scroll-icon" data-icon="balance"></i>
@@ -347,132 +815,272 @@
             
             <!-- Comparison toggle controls -->
             <div class="bg-white rounded-lg shadow-md p-6 mb-6">
-                <div class="flex justify-center items-center mb-6">
-                    <span class="mr-4 font-bold text-gray-600">Classical Myth</span>
-                    <label class="comparison-toggle">
-                        <input type="checkbox" id="comparisonToggle">
-                        <span class="comparison-slider"></span>
-                    </label>
-                    <span class="ml-4 font-bold text-blue-600">Disney's Version</span>
+                <!-- Modern toggle control -->
+                <div class="flex flex-col items-center justify-center mb-6">
+                    <div class="toggle-container">
+                        <span class="toggle-label toggle-label-left font-bold text-gray-600 transition-all duration-300" id="mythLabel">Classical Myth</span>
+                        <div class="toggle-switch-container">
+                            <label class="comparison-toggle relative cursor-pointer">
+                                <input type="checkbox" id="comparisonToggle">
+                                <span class="comparison-slider"></span>
+                            </label>
+                        </div>
+                        <span class="toggle-label toggle-label-right text-gray-400 transition-all duration-300" id="disneyLabel">Disney's Version</span>
+                    </div>
+                    <p class="text-sm text-gray-500 italic mt-4">Toggle to compare how Disney adapted the original myth</p>
                 </div>
                 
-                <!-- Comparison table -->
-                <div class="grid grid-cols-1 gap-4">
-                    <!-- Row 1: Origins -->
-                    <div class="comparison-wrapper bg-gray-50 p-4 rounded-lg">
-                        <h3 class="font-bold text-xl mb-3 text-center">Origins</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="comparison-side myth-side">
-                                <p><strong>Classical Myth:</strong> Herakles is born a demigod, son of Zeus and the mortal woman Alcmene (Zeus deceived her by taking the form of her husband).</p>
-                                <div class="mt-2 flex">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Birth_Herakles_Louvre_K3.jpg/800px-Birth_Herakles_Louvre_K3.jpg" alt="Birth of Herakles" class="h-32 rounded-lg mx-auto">
-                                </div>
-                            </div>
-                            <div class="comparison-side disney-side opacity-50">
-                                <p><strong>Disney's Version:</strong> Hercules is born a full god on Mount Olympus to Zeus and Hera, then turned mortal (but retaining his strength) by Hades' minions.</p>
-                                <div class="mt-2 flex">
-                                    <img src="https://static.wikia.nocookie.net/disney/images/4/4f/Hercules-br-disneyscreencaps.com-635.jpg" alt="Baby Hercules" class="h-32 rounded-lg mx-auto">
-                                </div>
-                                <div class="mt-2 flex justify-center">
-                                    <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-medium">
+                <!-- Card-based comparison -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Card 1: Origins -->
+                    <div class="comparison-card bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300" data-comparison="origins">
+                        <div class="card-header bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-4 border-b border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-bold text-gray-800">Origins</h3>
+                                <div class="status-indicator">
+                                    <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-xs font-medium">
                                         <i class="fas fa-sync-alt mr-1"></i> Changed
                                     </span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Row 2: Hera -->
-                    <div class="comparison-wrapper bg-gray-50 p-4 rounded-lg">
-                        <h3 class="font-bold text-xl mb-3 text-center">Hera's Role</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="comparison-side myth-side">
-                                <p><strong>Classical Myth:</strong> Hera is Herakles' nemesis, sending serpents to kill him as an infant and later driving him to madness that causes him to kill his family.</p>
-                                <div class="mt-2 flex">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Peter_Paul_Rubens_-_The_Apotheosis_of_Hercules_%281636%29.jpg" alt="Hera and Hercules myth" class="h-32 rounded-lg mx-auto">
+                        
+                        <div class="relative overflow-hidden">
+                            <!-- Myth side -->
+                            <div class="side-panel myth-panel p-6 transition-all duration-500 ease-in-out">
+                                <div class="flex items-start">
+                                    <div class="flex-1 pr-4">
+                                        <h4 class="font-semibold text-gray-800 mb-2">Classical Myth</h4>
+                                        <p>Herakles is born a demigod, son of Zeus and the mortal woman Alcmene. Zeus deceived Alcmene by taking the form of her husband Amphitryon.</p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <img src="images/hercules_origin.jpg" alt="Birth of Herakles" class="w-24 h-24 object-cover rounded-lg">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="comparison-side disney-side opacity-50">
-                                <p><strong>Disney's Version:</strong> Hera is portrayed as Hercules' loving mother who welcomes him back to Olympus and supports him throughout.</p>
-                                <div class="mt-2 flex">
-                                    <img src="https://static.wikia.nocookie.net/disney/images/5/5c/Hercules_%281997%29_-_Hera.jpg" alt="Disney's Hera" class="h-32 rounded-lg mx-auto">
-                                </div>
-                                <div class="mt-2 flex justify-center">
-                                    <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-medium">
-                                        <i class="fas fa-sync-alt mr-1"></i> Changed
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Row 3: Twelve Labors -->
-                    <div class="comparison-wrapper bg-gray-50 p-4 rounded-lg">
-                        <h3 class="font-bold text-xl mb-3 text-center">The Twelve Labors</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="comparison-side myth-side">
-                                <p><strong>Classical Myth:</strong> Herakles must complete 12 specific, nearly impossible tasks (like slaying the Nemean Lion and capturing Cerberus) as penance for killing his family.</p>
-                                <div class="mt-2 flex">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Herakles_Cerberus_Eurystheus_Louvre_E701.jpg/800px-Herakles_Cerberus_Eurystheus_Louvre_E701.jpg" alt="Twelve Labors" class="h-32 rounded-lg mx-auto">
-                                </div>
-                            </div>
-                            <div class="comparison-side disney-side opacity-50">
-                                <p><strong>Disney's Version:</strong> Hercules faces a training montage and a series of heroic acts, including defeating the Hydra, but the formal structure of 12 labors is absent.</p>
-                                <div class="mt-2 flex">
-                                    <img src="https://static.wikia.nocookie.net/disney/images/f/f3/Hercules-br-disneyscreencaps.com-6072.jpg" alt="Hercules fighting Hydra" class="h-32 rounded-lg mx-auto">
-                                </div>
-                                <div class="mt-2 flex justify-center">
-                                    <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-medium">
-                                        <i class="fas fa-sync-alt mr-1"></i> Changed
-                                    </span>
+                            
+                            <!-- Disney side -->
+                            <div class="side-panel disney-panel p-6 absolute top-0 left-0 w-full h-full transition-all duration-500 ease-in-out translate-x-full">
+                                <div class="flex items-start">
+                                    <div class="flex-1 pr-4">
+                                        <h4 class="font-semibold text-blue-800 mb-2">Disney's Version</h4>
+                                        <p>Hercules is born a full god on Mount Olympus to Zeus and Hera, then turned mortal (but retaining his strength) by Hades' minions.</p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <img src="images/disney_hercules_origins_2.jpg" alt="Baby Hercules" class="w-24 h-24 object-cover rounded-lg">
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <!-- Row 4: Megara -->
-                    <div class="comparison-wrapper bg-gray-50 p-4 rounded-lg">
-                        <h3 class="font-bold text-xl mb-3 text-center">Megara</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="comparison-side myth-side">
-                                <p><strong>Classical Myth:</strong> Megara is Herakles' first wife whom he tragically murders during his madness (along with their children).</p>
-                                <div class="mt-2 flex justify-center">
-                                    <i class="fas fa-theater-masks text-6xl text-gray-400"></i>
-                                </div>
-                            </div>
-                            <div class="comparison-side disney-side opacity-50">
-                                <p><strong>Disney's Version:</strong> Meg is a witty, independent woman who sold her soul to Hades and becomes Hercules' love interest.</p>
-                                <div class="mt-2 flex">
-                                    <img src="https://static.wikia.nocookie.net/disney/images/8/87/Profile_-_Megara.jpeg" alt="Disney's Megara" class="h-32 rounded-lg mx-auto">
-                                </div>
-                                <div class="mt-2 flex justify-center">
-                                    <span class="bg-orange-100 text-orange-800 px-2 py-1 rounded-full text-xs font-medium">
+                    <!-- Card 2: Hera -->
+                    <div class="comparison-card bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300" data-comparison="hera">
+                        <div class="card-header bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-4 border-b border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-bold text-gray-800">Hera's Role</h3>
+                                <div class="status-indicator">
+                                    <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-xs font-medium">
                                         <i class="fas fa-sync-alt mr-1"></i> Changed
                                     </span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    
-                    <!-- Row 5: Apotheosis -->
-                    <div class="comparison-wrapper bg-gray-50 p-4 rounded-lg">
-                        <h3 class="font-bold text-xl mb-3 text-center">Apotheosis</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="comparison-side myth-side">
-                                <p><strong>Classical Myth:</strong> Herakles achieves godhood after his death, when his mortal part burns away on a funeral pyre and his divine essence ascends to Olympus.</p>
-                                <div class="mt-2 flex">
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Peter_Paul_Rubens_-_The_Apotheosis_of_Hercules_%281636%29.jpg" alt="Herakles Apotheosis" class="h-32 rounded-lg mx-auto">
+                        
+                        <div class="relative overflow-hidden">
+                            <!-- Myth side -->
+                            <div class="side-panel myth-panel p-6 transition-all duration-500 ease-in-out">
+                                <div class="flex items-start">
+                                    <div class="flex-1 pr-4">
+                                        <h4 class="font-semibold text-gray-800 mb-2">Classical Myth</h4>
+                                        <p>Hera is Herakles' nemesis, sending serpents to kill him as an infant and later driving him to madness that causes him to kill his family.</p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <img src="images/hercules_origin.jpg" alt="Hera and Hercules myth" class="w-24 h-24 object-cover rounded-lg">
+                                    </div>
                                 </div>
                             </div>
-                            <div class="comparison-side disney-side opacity-50">
-                                <p><strong>Disney's Version:</strong> Hercules achieves godhood by willingly sacrificing himself to save Megara, proving he's a "true hero."</p>
-                                <div class="mt-2 flex">
-                                    <img src="https://static.wikia.nocookie.net/disney/images/8/8d/Hercules_%281997%29_-_Hercules_becoming_a_god.jpg" alt="Disney Hercules Apotheosis" class="h-32 rounded-lg mx-auto">
+                            
+                            <!-- Disney side -->
+                            <div class="side-panel disney-panel p-6 absolute top-0 left-0 w-full h-full transition-all duration-500 ease-in-out translate-x-full">
+                                <div class="flex items-start">
+                                    <div class="flex-1 pr-4">
+                                        <h4 class="font-semibold text-blue-800 mb-2">Disney's Version</h4>
+                                        <p>Hera is portrayed as Hercules' loving mother who welcomes him back to Olympus and supports him throughout.</p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <img src="images/disney_hera_hercules.jpeg" alt="Disney's Hera" class="w-24 h-24 object-cover rounded-lg">
+                                    </div>
                                 </div>
-                                <div class="mt-2 flex justify-center">
-                                    <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 3: Twelve Labors -->
+                    <div class="comparison-card bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300" data-comparison="labors">
+                        <div class="card-header bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-4 border-b border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-bold text-gray-800">The Twelve Labors</h3>
+                                <div class="status-indicator">
+                                    <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-xs font-medium">
+                                        <i class="fas fa-sync-alt mr-1"></i> Changed
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="relative overflow-hidden">
+                            <!-- Myth side -->
+                            <div class="side-panel myth-panel p-6 transition-all duration-500 ease-in-out">
+                                <div class="flex items-start">
+                                    <div class="flex-1 pr-4">
+                                        <h4 class="font-semibold text-gray-800 mb-2">Classical Myth</h4>
+                                        <p>Herakles must complete 12 specific, nearly impossible tasks (like slaying the Nemean Lion and capturing Cerberus) as penance for killing his family.</p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <img src="images/hercules_12_labors.jpg" alt="Twelve Labors" class="w-24 h-24 object-cover rounded-lg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Disney side -->
+                            <div class="side-panel disney-panel p-6 absolute top-0 left-0 w-full h-full transition-all duration-500 ease-in-out translate-x-full">
+                                <div class="flex items-start">
+                                    <div class="flex-1 pr-4">
+                                        <h4 class="font-semibold text-blue-800 mb-2">Disney's Version</h4>
+                                        <p>Hercules faces a training montage and a series of heroic acts, including defeating the Hydra, but the formal structure of 12 labors is absent.</p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <img src="images/disney_hercules_training.jpg" alt="Hercules fighting Hydra" class="w-24 h-24 object-cover rounded-lg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 4: Megara -->
+                    <div class="comparison-card bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300" data-comparison="megara">
+                        <div class="card-header bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-4 border-b border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-bold text-gray-800">Megara</h3>
+                                <div class="status-indicator">
+                                    <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-xs font-medium">
+                                        <i class="fas fa-sync-alt mr-1"></i> Changed
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="relative overflow-hidden">
+                            <!-- Myth side -->
+                            <div class="side-panel myth-panel p-6 transition-all duration-500 ease-in-out">
+                                <div class="flex items-start">
+                                    <div class="flex-1 pr-4">
+                                        <h4 class="font-semibold text-gray-800 mb-2">Classical Myth</h4>
+                                        <p>Megara is Herakles' first wife whom he tragically murders during his madness (along with their children).</p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <img src="images/hercules_megara.jpg" alt="Megara in Classical Art" class="w-24 h-24 object-cover rounded-lg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Disney side -->
+                            <div class="side-panel disney-panel p-6 absolute top-0 left-0 w-full h-full transition-all duration-500 ease-in-out translate-x-full">
+                                <div class="flex items-start">
+                                    <div class="flex-1 pr-4">
+                                        <h4 class="font-semibold text-blue-800 mb-2">Disney's Version</h4>
+                                        <p>Meg is a witty, independent woman who sold her soul to Hades and becomes Hercules' love interest.</p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <img src="images/disney_hercules_megara.webp" alt="Disney's Megara" class="w-24 h-24 object-cover rounded-lg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 5: Nessus -->
+                    <div class="comparison-card bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300" data-comparison="nessus">
+                        <div class="card-header bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-4 border-b border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-bold text-gray-800">Nessus</h3>
+                                <div class="status-indicator">
+                                    <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-xs font-medium">
+                                        <i class="fas fa-sync-alt mr-1"></i> Changed
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="relative overflow-hidden">
+                            <!-- Myth side -->
+                            <div class="side-panel myth-panel p-6 transition-all duration-500 ease-in-out">
+                                <div class="flex items-start">
+                                    <div class="flex-1 pr-4">
+                                        <h4 class="font-semibold text-gray-800 mb-2">Classical Myth</h4>
+                                        <p>Nessus plays a tragic role in Herakles' death. After Herakles defeats him, the dying centaur gives Deianeira (Herakles' wife) a poisoned robe that eventually causes Herakles' death and apotheosis.</p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <img src="images/hercules_nessus.png" alt="Hercules and Nessus" class="w-24 h-24 object-cover rounded-lg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Disney side -->
+                            <div class="side-panel disney-panel p-6 absolute top-0 left-0 w-full h-full transition-all duration-500 ease-in-out translate-x-full">
+                                <div class="flex items-start">
+                                    <div class="flex-1 pr-4">
+                                        <h4 class="font-semibold text-blue-800 mb-2">Disney's Version</h4>
+                                        <p>Nessus is portrayed as a comic villain who harasses Megara. Hercules defeats him in an early heroic act, demonstrating his physical strength but lack of finesse.</p>
+                                    </div>
+                                    <div class="flex-shrink-0 ml-4">
+                                        <img src="images/disney_hercules_nessus.webp" alt="Disney's Hercules vs Nessus" class="w-24 h-24 object-cover rounded-lg">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Card 6: Apotheosis -->
+                    <div class="comparison-card bg-white border border-gray-200 rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-300 md:col-span-2">
+                        <div class="card-header bg-gradient-to-r from-blue-50 to-purple-50 px-6 py-4 border-b border-gray-200">
+                            <div class="flex justify-between items-center">
+                                <h3 class="text-lg font-bold text-gray-800">Apotheosis</h3>
+                                <div class="status-indicator">
+                                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-medium">
                                         <i class="fas fa-check mr-1"></i> Preserved (Modified)
                                     </span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="relative overflow-hidden">
+                            <!-- Myth side -->
+                            <div class="side-panel myth-panel p-6 transition-all duration-500 ease-in-out">
+                                <div class="md:flex items-start">
+                                    <div class="flex-1 pr-4">
+                                        <h4 class="font-semibold text-gray-800 mb-2">Classical Myth</h4>
+                                        <p class="mb-4">Herakles achieves godhood after his death, when his mortal part burns away on a funeral pyre and his divine essence ascends to Olympus.</p>
+                                        <p>In the original myth, Herakles is poisoned by the blood of the centaur Nessus on a robe given to him by his wife Deianeira. The pain is so unbearable that he builds his own funeral pyre on Mount Oeta and asks to be burned alive. As his mortal flesh burns away, his divine essence—inherited from his father Zeus—ascends to Mount Olympus, where he is welcomed as a god.</p>
+                                    </div>
+                                    <div class="flex-shrink-0 mt-4 md:mt-0 md:ml-4">
+                                        <img src="images/hercules_apotheosis.png" alt="Herakles Apotheosis" class="w-full md:w-40 h-auto object-cover rounded-lg">
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Disney side -->
+                            <div class="side-panel disney-panel p-6 absolute top-0 left-0 w-full h-full transition-all duration-500 ease-in-out translate-x-full">
+                                <div class="md:flex items-start">
+                                    <div class="flex-1 pr-4">
+                                        <h4 class="font-semibold text-blue-800 mb-2">Disney's Version</h4>
+                                        <p class="mb-4">Hercules achieves godhood by willingly sacrificing himself to save Megara, proving he's a "true hero."</p>
+                                        <p>Disney reframes apotheosis as a reward for selfless sacrifice rather than the result of suffering. When Hercules dives into the River Styx to rescue Megara's soul, he willingly accepts death, demonstrating that "a true hero isn't measured by the size of his strength, but by the strength of his heart." This moral choice—rather than divine heritage—is what ultimately earns him godhood.</p>
+                                    </div>
+                                    <div class="flex-shrink-0 mt-4 md:mt-0 md:ml-4">
+                                        <img src="images/disney_hercules_saving_meg.jpg" alt="Disney Hercules Apotheosis" class="w-full md:w-40 h-auto object-cover rounded-lg">
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -481,7 +1089,7 @@
             </div>
         </section>
         
-        <!-- Section 3: Preservation -->
+        <!-- Section: Preservation -->
         <section id="preservation" class="mb-16 opacity-0 transform translate-y-4 transition-all duration-700" data-section>
             <h2 class="text-3xl font-bold mb-6 text-blue-900 flex items-center">
                 <i class="fas fa-landmark mr-3 text-purple-600 scroll-icon" data-icon="landmark"></i>
@@ -505,14 +1113,14 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <img src="https://static.wikia.nocookie.net/disney/images/8/8d/Hercules_%281997%29_-_Hercules_and_Megara.jpg" alt="Hercules and Megara" class="rounded-lg section-image">
-                        <img src="https://static.wikia.nocookie.net/disney/images/4/4a/Hercules_%281997%29_-_Hercules_and_Zeus.jpg" alt="Hercules and Zeus" class="rounded-lg section-image">
+                        <img src="images/disney_hercules_snakes.jpg" alt="Hercules and Megara" class="rounded-lg section-image">
+                        <img src="images/disney_herculess_apotheosis.avif" alt="Hercules and Zeus" class="rounded-lg section-image">
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 4: Adaptation -->
+        <!-- Section: Adaptation & Change -->
         <section id="adaptation" class="mb-16 opacity-0 transform translate-y-4 transition-all duration-700" data-section>
             <h2 class="text-3xl font-bold mb-6 text-blue-900 flex items-center">
                 <i class="fas fa-theater-masks mr-3 text-purple-600 scroll-icon" data-icon="masks"></i>
@@ -530,11 +1138,6 @@
                             <li><strong>Twelve Labors:</strong> <span class="text-orange-600"><i class="fas fa-exchange-alt mr-1"></i></span> These iconic tasks are replaced with a montage of monster-slaying for entertainment value and pacing.</li>
                         </ul>
                         
-                        <div class="theme-tracker mt-8">
-                            <div class="theme-tracker-progress" style="width: 50%"></div>
-                            <div class="theme-marker" style="left: 50%">Heroism</div>
-                        </div>
-                        
                         <div class="quote-box mt-6" data-quote>
                             <p class="italic">"A true hero isn't measured by the size of his strength, but by the strength of his heart."</p>
                             <p class="text-right mt-2 font-bold">— Zeus, Hercules (1997)</p>
@@ -542,140 +1145,19 @@
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="comparison-card bg-gray-50 p-4 rounded-lg">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Herakles_and_Hera_MET_DP-14201-003.jpg/800px-Herakles_and_Hera_MET_DP-14201-003.jpg" alt="Mythological Hera" class="rounded-lg mb-2">
+                            <img src="images/hercules_origin.jpg" alt="Mythological Hera" class="rounded-lg mb-2">
                             <p class="text-sm text-center">Mythological Hera</p>
                         </div>
                         <div class="comparison-card bg-gray-50 p-4 rounded-lg">
-                            <img src="https://static.wikia.nocookie.net/disney/images/5/5c/Hercules_%281997%29_-_Hera.jpg" alt="Disney's Hera" class="rounded-lg mb-2">
+                            <img src="images/disney_hera_hercules.jpeg" alt="Disney's Hera" class="rounded-lg mb-2">
                             <p class="text-sm text-center">Disney's Hera</p>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
-        <!-- NEW SECTION: Visual Gallery -->
-        <section id="gallery" class="mb-16 opacity-0 transform translate-y-4 transition-all duration-700" data-section>
-            <h2 class="text-3xl font-bold mb-6 text-blue-900 flex items-center">
-                <i class="fas fa-images mr-3 text-purple-600 scroll-icon" data-icon="images"></i>
-                Visual Gallery
-            </h2>
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <p class="mb-6 text-center">Explore both ancient depictions of Herakles and Disney's modern reinterpretations.</p>
-                
-                <!-- Tab navigation -->
-                <div class="flex justify-center border-b mb-6">
-                    <button class="gallery-tab px-4 py-2 mr-2 bg-blue-100 text-blue-800 rounded-t-lg font-medium gallery-tab-active" data-tab="ancient">
-                        Ancient Art
-                    </button>
-                    <button class="gallery-tab px-4 py-2 mr-2 bg-gray-100 text-gray-600 rounded-t-lg font-medium" data-tab="disney">
-                        Disney Film
-                    </button>
-                    <button class="gallery-tab px-4 py-2 bg-gray-100 text-gray-600 rounded-t-lg font-medium" data-tab="comparison">
-                        Side-by-Side
-                    </button>
-                </div>
-                
-                <!-- Gallery content - Ancient Art -->
-                <div class="gallery-content active" data-content="ancient">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="gallery-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/Birth_Herakles_Louvre_K3.jpg/800px-Birth_Herakles_Louvre_K3.jpg" alt="Birth of Herakles" class="w-full h-64 object-cover rounded-lg">
-                            <p class="mt-2 text-sm text-center">The birth of Herakles</p>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Heracles_and_the_Hydra_MET_DP-14201-001.jpg/800px-Heracles_and_the_Hydra_MET_DP-14201-001.jpg" alt="Herakles and the Hydra" class="w-full h-64 object-cover rounded-lg">
-                            <p class="mt-2 text-sm text-center">Herakles battles the Hydra</p>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Heracles_and_the_Nemean_Lion_MET_DP-14201-002.jpg/800px-Heracles_and_the_Nemean_Lion_MET_DP-14201-002.jpg" alt="Herakles and the Nemean Lion" class="w-full h-64 object-cover rounded-lg">
-                            <p class="mt-2 text-sm text-center">Herakles and the Nemean Lion</p>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/25/Herakles_Cerberus_Eurystheus_Louvre_E701.jpg/800px-Herakles_Cerberus_Eurystheus_Louvre_E701.jpg" alt="Herakles Capturing Cerberus" class="w-full h-64 object-cover rounded-lg">
-                            <p class="mt-2 text-sm text-center">Herakles captures Cerberus</p>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Peter_Paul_Rubens_-_The_Apotheosis_of_Hercules_%281636%29.jpg" alt="Apotheosis of Herakles" class="w-full h-64 object-cover rounded-lg">
-                            <p class="mt-2 text-sm text-center">The apotheosis of Herakles</p>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/7/76/Herakles_and_the_Stymphalian_birds.jpg" alt="Herakles and the Stymphalian Birds" class="w-full h-64 object-cover rounded-lg">
-                            <p class="mt-2 text-sm text-center">Herakles and the Stymphalian Birds</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Gallery content - Disney Film -->
-                <div class="gallery-content hidden" data-content="disney">
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="gallery-item">
-                            <img src="https://static.wikia.nocookie.net/disney/images/4/4f/Hercules-br-disneyscreencaps.com-635.jpg" alt="Baby Hercules" class="w-full h-64 object-cover rounded-lg">
-                            <p class="mt-2 text-sm text-center">Baby Hercules on Mount Olympus</p>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://static.wikia.nocookie.net/disney/images/f/f3/Hercules-br-disneyscreencaps.com-6072.jpg" alt="Hercules and the Hydra" class="w-full h-64 object-cover rounded-lg">
-                            <p class="mt-2 text-sm text-center">Hercules battles the Hydra</p>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://static.wikia.nocookie.net/disney/images/8/8d/Hercules_%281997%29_-_Hercules_and_Megara.jpg" alt="Hercules and Megara" class="w-full h-64 object-cover rounded-lg">
-                            <p class="mt-2 text-sm text-center">Hercules and Megara</p>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://static.wikia.nocookie.net/disney/images/7/75/Hercules-br-disneyscreencaps.com-7491.jpg" alt="Hercules Training" class="w-full h-64 object-cover rounded-lg">
-                            <p class="mt-2 text-sm text-center">Hercules' training</p>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://static.wikia.nocookie.net/disney/images/9/9c/Hercules_%281997%29_-_Hercules_and_Megara_sacrifice.jpg" alt="Hercules Sacrifice" class="w-full h-64 object-cover rounded-lg">
-                            <p class="mt-2 text-sm text-center">Hercules' sacrifice</p>
-                        </div>
-                        <div class="gallery-item">
-                            <img src="https://static.wikia.nocookie.net/disney/images/8/8d/Hercules_%281997%29_-_Hercules_becoming_a_god.jpg" alt="Hercules Becoming a God" class="w-full h-64 object-cover rounded-lg">
-                            <p class="mt-2 text-sm text-center">Hercules becoming a god</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Gallery content - Side-by-Side Comparison -->
-                <div class="gallery-content hidden" data-content="comparison">
-                    <div class="grid grid-cols-1 gap-6">
-                        <!-- Comparison 1 -->
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h3 class="text-center font-bold mb-4">Hercules vs. The Hydra</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Heracles_and_the_Hydra_MET_DP-14201-001.jpg/800px-Heracles_and_the_Hydra_MET_DP-14201-001.jpg" alt="Ancient Hydra" class="w-full h-48 object-cover rounded-lg">
-                                    <p class="mt-2 text-sm text-center">Ancient depiction</p>
-                                </div>
-                                <div>
-                                    <img src="https://static.wikia.nocookie.net/disney/images/f/f3/Hercules-br-disneyscreencaps.com-6072.jpg" alt="Disney Hydra" class="w-full h-48 object-cover rounded-lg">
-                                    <p class="mt-2 text-sm text-center">Disney interpretation</p>
-                                </div>
-                            </div>
-                            <p class="mt-4 text-center">What's similar? What's different? <span class="font-bold">Note the dramatic action in both!</span></p>
-                        </div>
-                        
-                        <!-- Comparison 2 -->
-                        <div class="bg-gray-50 p-4 rounded-lg">
-                            <h3 class="text-center font-bold mb-4">Apotheosis</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                <div>
-                                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Peter_Paul_Rubens_-_The_Apotheosis_of_Hercules_%281636%29.jpg" alt="Ancient Apotheosis" class="w-full h-48 object-cover rounded-lg">
-                                    <p class="mt-2 text-sm text-center">Classical depiction</p>
-                                </div>
-                                <div>
-                                    <img src="https://static.wikia.nocookie.net/disney/images/8/8d/Hercules_%281997%29_-_Hercules_becoming_a_god.jpg" alt="Disney Apotheosis" class="w-full h-48 object-cover rounded-lg">
-                                    <p class="mt-2 text-sm text-center">Disney interpretation</p>
-                                </div>
-                            </div>
-                            <p class="mt-4 text-center">What's missing? <span class="font-bold">Disney omits the funeral pyre and focuses on reunion.</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Section 5: Interpretation -->
+        <!-- Section: Interpretation -->
         <section id="interpretation" class="mb-16 opacity-0 transform translate-y-4 transition-all duration-700" data-section>
             <h2 class="text-3xl font-bold mb-6 text-blue-900 flex items-center">
                 <i class="fas fa-lightbulb mr-3 text-purple-600 scroll-icon" data-icon="lightbulb"></i>
@@ -692,11 +1174,6 @@
                             <li><strong>Optimism and Accessibility:</strong> The darker elements of Herakles' story are rewritten to inspire and uplift rather than terrify.</li>
                         </ul>
                         
-                        <div class="theme-tracker mt-8">
-                            <div class="theme-tracker-progress" style="width: 80%"></div>
-                            <div class="theme-marker" style="left: 80%">Sacrifice</div>
-                        </div>
-                        
                         <div class="quote-box mt-6" data-quote>
                             <p class="italic">"People always do crazy things... when they're in love."</p>
                             <p class="text-right mt-2 font-bold">— Megara, Hercules (1997)</p>
@@ -705,10 +1182,10 @@
                     <div class="swiper">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <img src="https://static.wikia.nocookie.net/disney/images/9/9c/Hercules_%281997%29_-_Hercules_and_Megara_sacrifice.jpg" alt="Hercules' Sacrifice" class="rounded-lg">
+                                <img src="images/disney_hercules_saving_meg.jpg" alt="Hercules' Sacrifice" class="rounded-lg">
                             </div>
                             <div class="swiper-slide">
-                                <img src="https://static.wikia.nocookie.net/disney/images/8/8d/Hercules_%281997%29_-_Hercules_becoming_a_god.jpg" alt="Hercules' Apotheosis" class="rounded-lg">
+                                <img src="images/disney_herculess_apotheosis.avif" alt="Hercules' Apotheosis" class="rounded-lg">
                             </div>
                         </div>
                         <div class="swiper-pagination"></div>
@@ -718,78 +1195,8 @@
                 </div>
             </div>
         </section>
-        
-        <!-- NEW SECTION: FAQ Accordion -->
-        <section id="faq" class="mb-16 opacity-0 transform translate-y-4 transition-all duration-700" data-section>
-            <h2 class="text-3xl font-bold mb-6 text-blue-900 flex items-center">
-                <i class="fas fa-question-circle mr-3 text-purple-600 scroll-icon" data-icon="question"></i>
-                Frequently Asked Questions
-            </h2>
-            <div class="bg-white rounded-lg shadow-md p-6">
-                <div class="space-y-4">
-                    <!-- FAQ Item 1 -->
-                    <div class="accordion-item border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="accordion-button w-full bg-gray-50 px-4 py-3 text-left font-medium flex justify-between items-center">
-                            <span>Why did Disney change the story so dramatically?</span>
-                            <i class="fas fa-chevron-down transition-transform"></i>
-                        </button>
-                        <div class="accordion-content bg-white px-4 py-0">
-                            <div class="py-3">
-                                <p>Disney significantly altered the story for several reasons:</p>
-                                <ul class="list-disc pl-5 mt-2">
-                                    <li>To make it appropriate for a family audience (removing infanticide, madness)</li>
-                                    <li>To create a more straightforward hero's journey narrative structure</li>
-                                    <li>To align with Disney's brand values of optimism and self-discovery</li>
-                                    <li>To create opportunities for musical sequences and comedic elements</li>
-                                </ul>
-                                <p class="mt-2">This is consistent with Disney's approach to other myths and fairy tales, where darker elements are often softened or transformed.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 2 -->
-                    <div class="accordion-item border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="accordion-button w-full bg-gray-50 px-4 py-3 text-left font-medium flex justify-between items-center">
-                            <span>What is apotheosis and why is it significant?</span>
-                            <i class="fas fa-chevron-down transition-transform"></i>
-                        </button>
-                        <div class="accordion-content bg-white px-4 py-0">
-                            <div class="py-3">
-                                <p>Apotheosis refers to the elevation of a person to divine status—essentially, becoming a god. In Greek mythology, this was a rare honor reserved for exceptional heroes.</p>
-                                <p class="mt-2">In Herakles' original myth, apotheosis comes after death and suffering, serving as the ultimate redemption. Disney preserves this key element but changes how it's achieved:</p>
-                                <ul class="list-disc pl-5 mt-2">
-                                    <li>Original myth: Apotheosis through death and divine judgment</li>
-                                    <li>Disney: Apotheosis through selfless sacrifice and proving "true heroism"</li>
-                                </ul>
-                                <p class="mt-2">This reflects modern values that prioritize moral choices over fate or divine judgment.</p>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- FAQ Item 3 -->
-                    <div class="accordion-item border border-gray-200 rounded-lg overflow-hidden">
-                        <button class="accordion-button w-full bg-gray-50 px-4 py-3 text-left font-medium flex justify-between items-center">
-                            <span>How does this relate to modern values?</span>
-                            <i class="fas fa-chevron-down transition-transform"></i>
-                        </button>
-                        <div class="accordion-content bg-white px-4 py-0">
-                            <div class="py-3">
-                                <p>Disney's adaptation reflects several contemporary values and concerns:</p>
-                                <ul class="list-disc pl-5 mt-2">
-                                    <li><strong>Identity:</strong> Hercules' quest to find where he belongs resonates with modern themes of self-discovery</li>
-                                    <li><strong>Merit vs. Birth:</strong> The idea that heroism is earned through actions rather than inherited aligns with democratic values</li>
-                                    <li><strong>Celebrity Culture:</strong> The film satirizes fame through Hercules' merchandise and fans</li>
-                                    <li><strong>Love as Redemptive:</strong> The romantic subplot offers a modern, optimistic view of relationships as transformative</li>
-                                </ul>
-                                <p class="mt-2">These themes make the ancient story relatable to contemporary audiences while maintaining some connection to its mythological roots.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- NEW SECTION: Apotheosis as Cultural Focal Point -->
+        <!-- Section: Apotheosis as Cultural Focal Point -->
         <section id="apotheosis" class="mb-16 opacity-0 transform translate-y-4 transition-all duration-700" data-section>
             <h2 class="text-3xl font-bold mb-6 text-blue-900 flex items-center">
                 <i class="fas fa-star mr-3 text-purple-600 scroll-icon" data-icon="star"></i>
@@ -870,19 +1277,226 @@
                 
                 <div class="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div class="comparison-card bg-gray-50 p-4 rounded-lg">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Peter_Paul_Rubens_-_The_Apotheosis_of_Hercules_%281636%29.jpg" alt="Classical Apotheosis" class="rounded-lg mb-4 mx-auto max-h-64">
+                        <img src="images/hercules_apotheosis.png" alt="Classical Apotheosis" class="rounded-lg mb-4 mx-auto max-h-64">
                         <p class="text-center font-medium">The classical apotheosis emphasizes <span class="text-red-600">suffering</span>, <span class="text-red-600">purification</span>, and <span class="text-red-600">divine judgment</span></p>
                     </div>
                     
                     <div class="comparison-card bg-gray-50 p-4 rounded-lg">
-                        <img src="https://static.wikia.nocookie.net/disney/images/8/8d/Hercules_%281997%29_-_Hercules_becoming_a_god.jpg" alt="Disney's Apotheosis" class="rounded-lg mb-4 mx-auto max-h-64">
+                        <img src="images/disney_herculess_apotheosis.avif" alt="Disney's Apotheosis" class="rounded-lg mb-4 mx-auto max-h-64">
                         <p class="text-center font-medium">Disney's version emphasizes <span class="text-blue-600">choice</span>, <span class="text-blue-600">selflessness</span>, and <span class="text-blue-600">moral achievement</span></p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Section 6: Conclusion -->
+        <!-- Section: Visual Gallery -->
+        <section id="gallery" class="mb-16 opacity-0 transform translate-y-4 transition-all duration-700" data-section>
+            <h2 class="text-3xl font-bold mb-6 text-blue-900 flex items-center">
+                <i class="fas fa-images mr-3 text-purple-600 scroll-icon" data-icon="images"></i>
+                Visual Gallery
+            </h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <p class="mb-6 text-center">Explore both ancient depictions of Herakles and Disney's modern reinterpretations.</p>
+                
+                <!-- Tab navigation -->
+                <div class="flex justify-center border-b mb-6">
+                    <button class="gallery-tab px-4 py-2 mr-2 bg-blue-100 text-blue-800 rounded-t-lg font-medium gallery-tab-active" data-tab="ancient">
+                        Ancient Art
+                    </button>
+                    <button class="gallery-tab px-4 py-2 mr-2 bg-gray-100 text-gray-600 rounded-t-lg font-medium" data-tab="disney">
+                        Disney Film
+                    </button>
+                    <button class="gallery-tab px-4 py-2 bg-gray-100 text-gray-600 rounded-t-lg font-medium" data-tab="comparison">
+                        Side-by-Side
+                    </button>
+                </div>
+                
+                <!-- Gallery content - Ancient Art -->
+                <div class="gallery-content active" data-content="ancient">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="gallery-item">
+                            <img src="images/hercules_origin.jpg" alt="Birth of Herakles" class="w-full h-64 object-cover rounded-lg">
+                            <p class="mt-2 text-sm text-center">The birth of Herakles</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/hercules_and_hydra.jpg" alt="Herakles and the Hydra" class="w-full h-64 object-cover rounded-lg">
+                            <p class="mt-2 text-sm text-center">Herakles battles the Hydra</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/hercules_lion.jpeg" alt="Herakles and the Nemean Lion" class="w-full h-64 object-cover rounded-lg">
+                            <p class="mt-2 text-sm text-center">Herakles and the Nemean Lion</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/hercules_12_labors.jpg" alt="Herakles' Twelve Labors" class="w-full h-64 object-cover rounded-lg">
+                            <p class="mt-2 text-sm text-center">The Twelve Labors of Herakles</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/hercules_apotheosis.png" alt="Apotheosis of Herakles" class="w-full h-64 object-cover rounded-lg">
+                            <p class="mt-2 text-sm text-center">The apotheosis of Herakles</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/hercules_nessus.png" alt="Herakles and Nessus" class="w-full h-64 object-cover rounded-lg">
+                            <p class="mt-2 text-sm text-center">Herakles and the centaur Nessus</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery content - Disney Film -->
+                <div class="gallery-content hidden" data-content="disney">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="gallery-item">
+                            <img src="images/disney_hercules_origins_2.jpg" alt="Baby Hercules" class="w-full h-64 object-cover rounded-lg">
+                            <p class="mt-2 text-sm text-center">Baby Hercules on Mount Olympus</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/disney_hercules_hydra.webp" alt="Hercules and the Hydra" class="w-full h-64 object-cover rounded-lg">
+                            <p class="mt-2 text-sm text-center">Hercules battles the Hydra</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/disney_hercules_nessus.webp" alt="Hercules and Nessus" class="w-full h-64 object-cover rounded-lg">
+                            <p class="mt-2 text-sm text-center">Hercules confronts Nessus the centaur</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/disney_hercules_megara.webp" alt="Hercules and Megara" class="w-full h-64 object-cover rounded-lg">
+                            <p class="mt-2 text-sm text-center">Megara from Disney's Hercules</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/disney_hera_hercules.jpeg" alt="Hercules and Hera" class="w-full h-64 object-cover rounded-lg">
+                            <p class="mt-2 text-sm text-center">Hera and baby Hercules</p>
+                        </div>
+                        <div class="gallery-item">
+                            <img src="images/disney_herculess_apotheosis.avif" alt="Hercules Becoming a God" class="w-full h-64 object-cover rounded-lg">
+                            <p class="mt-2 text-sm text-center">Hercules becoming a god</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Gallery content - Side-by-Side Comparison -->
+                <div class="gallery-content hidden" data-content="comparison">
+                    <div class="grid grid-cols-1 gap-6">
+                        <!-- Comparison 1 -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="text-center font-bold mb-4">Hercules vs. The Hydra</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-3">
+                                    <img src="images/hercules_and_hydra.jpg" alt="Ancient Hydra" class="w-full h-48 object-cover rounded-lg">
+                                    <p class="mt-2 text-sm text-center">Ancient depiction</p>
+                                </div>
+                                <div class="p-3">
+                                    <img src="https://static.wikia.nocookie.net/disney/images/f/f3/Hercules-br-disneyscreencaps.com-6072.jpg" alt="Disney Hydra" class="w-full h-48 object-cover rounded-lg">
+                                    <p class="mt-2 text-sm text-center">Disney interpretation</p>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-center">What's similar? What's different? <span class="font-bold">Note the dramatic action in both!</span></p>
+                        </div>
+                        
+                        <!-- Comparison 2 -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="text-center font-bold mb-4">Nessus the Centaur</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-3">
+                                    <img src="images/hercules_nessus.png" alt="Ancient Nessus" class="w-full h-48 object-cover rounded-lg">
+                                    <p class="mt-2 text-sm text-center">Classical depiction</p>
+                                </div>
+                                <div class="p-3">
+                                    <img src="images/disney_hercules_nessus.webp" alt="Disney Nessus" class="w-full h-48 object-cover rounded-lg">
+                                    <p class="mt-2 text-sm text-center">Disney interpretation</p>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-center">What's different? <span class="font-bold">Disney turns a tragic villain into comic relief.</span></p>
+                        </div>
+                        
+                        <!-- Comparison 3 -->
+                        <div class="bg-gray-50 p-4 rounded-lg">
+                            <h3 class="text-center font-bold mb-4">Apotheosis</h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div class="p-3">
+                                    <img src="images/hercules_apotheosis.png" alt="Ancient Apotheosis" class="w-full h-48 object-cover rounded-lg">
+                                    <p class="mt-2 text-sm text-center">Classical depiction</p>
+                                </div>
+                                <div class="p-3">
+                                    <img src="images/disney_herculess_apotheosis.avif" alt="Disney Apotheosis" class="w-full h-48 object-cover rounded-lg">
+                                    <p class="mt-2 text-sm text-center">Disney interpretation</p>
+                                </div>
+                            </div>
+                            <p class="mt-4 text-center">What's missing? <span class="font-bold">Disney omits the funeral pyre and focuses on reunion.</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: FAQ Accordion -->
+        <section id="faq" class="mb-16 opacity-0 transform translate-y-4 transition-all duration-700" data-section>
+            <h2 class="text-3xl font-bold mb-6 text-blue-900 flex items-center">
+                <i class="fas fa-question-circle mr-3 text-purple-600 scroll-icon" data-icon="question"></i>
+                Frequently Asked Questions
+            </h2>
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <div class="space-y-4">
+                    <!-- FAQ Item 1 -->
+                    <div class="accordion-item border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="accordion-button w-full bg-gray-50 px-4 py-3 text-left font-medium flex justify-between items-center">
+                            <span>Why did Disney change the story so dramatically?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="accordion-content bg-white px-4 py-0">
+                            <div class="py-3">
+                                <p>Disney significantly altered the story for several reasons:</p>
+                                <ul class="list-disc pl-5 mt-2">
+                                    <li>To make it appropriate for a family audience (removing infanticide, madness)</li>
+                                    <li>To create a more straightforward hero's journey narrative structure</li>
+                                    <li>To align with Disney's brand values of optimism and self-discovery</li>
+                                    <li>To create opportunities for musical sequences and comedic elements</li>
+                                </ul>
+                                <p class="mt-2">This is consistent with Disney's approach to other myths and fairy tales, where darker elements are often softened or transformed.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 2 -->
+                    <div class="accordion-item border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="accordion-button w-full bg-gray-50 px-4 py-3 text-left font-medium flex justify-between items-center">
+                            <span>What is apotheosis and why is it significant?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="accordion-content bg-white px-4 py-0">
+                            <div class="py-3">
+                                <p>Apotheosis refers to the elevation of a person to divine status—essentially, becoming a god. In Greek mythology, this was a rare honor reserved for exceptional heroes.</p>
+                                <p class="mt-2">In Herakles' original myth, apotheosis comes after death and suffering, serving as the ultimate redemption. Disney preserves this key element but changes how it's achieved:</p>
+                                <ul class="list-disc pl-5 mt-2">
+                                    <li>Original myth: Apotheosis through death and divine judgment</li>
+                                    <li>Disney: Apotheosis through selfless sacrifice and proving "true heroism"</li>
+                                </ul>
+                                <p class="mt-2">This reflects modern values that prioritize moral choices over fate or divine judgment.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- FAQ Item 3 -->
+                    <div class="accordion-item border border-gray-200 rounded-lg overflow-hidden">
+                        <button class="accordion-button w-full bg-gray-50 px-4 py-3 text-left font-medium flex justify-between items-center">
+                            <span>How does this relate to modern values?</span>
+                            <i class="fas fa-chevron-down transition-transform"></i>
+                        </button>
+                        <div class="accordion-content bg-white px-4 py-0">
+                            <div class="py-3">
+                                <p>Disney's adaptation reflects several contemporary values and concerns:</p>
+                                <ul class="list-disc pl-5 mt-2">
+                                    <li><strong>Identity:</strong> Hercules' quest to find where he belongs resonates with modern themes of self-discovery</li>
+                                    <li><strong>Merit vs. Birth:</strong> The idea that heroism is earned through actions rather than inherited aligns with democratic values</li>
+                                    <li><strong>Celebrity Culture:</strong> The film satirizes fame through Hercules' merchandise and fans</li>
+                                    <li><strong>Love as Redemptive:</strong> The romantic subplot offers a modern, optimistic view of relationships as transformative</li>
+                                </ul>
+                                <p class="mt-2">These themes make the ancient story relatable to contemporary audiences while maintaining some connection to its mythological roots.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section: Conclusion -->
         <section id="conclusion" class="mb-16 opacity-0 transform translate-y-4 transition-all duration-700" data-section>
             <h2 class="text-3xl font-bold mb-6 text-blue-900 flex items-center">
                 <i class="fas fa-flag-checkered mr-3 text-purple-600 scroll-icon" data-icon="flag"></i>
@@ -891,26 +1505,151 @@
             <div class="bg-white rounded-lg shadow-md p-6">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                        <p>Disney's Hercules is a prime example of classical reception: a vivid reimagining that adapts ancient myth for modern sensibilities. While it departs significantly from the source material, especially in its treatment of character motivations and tone, it retains essential mythic elements and offers a contemporary message about identity, sacrifice, and the meaning of heroism. Through these adaptations, the film introduces classical mythology to a new generation in an accessible and meaningful way, reflecting both the enduring power of ancient stories and the creative possibilities of reinterpretation.</p>
+                        <p>Disney's Hercules is a prime example of classical reception: a vivid reimagining that adapts ancient myth for modern sensibilities. While it departs significantly from the source material, especially in its treatment of character motivations and tone, it retains essential mythic elements and offers a contemporary message about identity, sacrifice, and the meaning of heroism.</p>
                         
-                        <div class="theme-tracker mt-8">
-                            <div class="theme-tracker-progress" style="width: 100%"></div>
-                        </div>
+                        <p class="mt-4">Most importantly, the film's treatment of apotheosis—transforming it from an outcome of suffering into a reward for selflessness—reflects a profound shift in cultural values. Through these adaptations, the film introduces classical mythology to a new generation in an accessible and meaningful way, reflecting both the enduring power of ancient stories and the creative possibilities of reinterpretation.</p>
                     </div>
                     <div class="grid grid-cols-2 gap-4">
-                        <img src="https://static.wikia.nocookie.net/disney/images/4/4a/Hercules_%281997%29_-_Hercules_and_Zeus.jpg" alt="Hercules and Zeus" class="rounded-lg section-image">
-                        <img src="https://static.wikia.nocookie.net/disney/images/8/8d/Hercules_%281997%29_-_Hercules_becoming_a_god.jpg" alt="Hercules' Apotheosis" class="rounded-lg section-image">
+                        <img src="images/hercules_origin.jpg" alt="Hercules and Zeus" class="rounded-lg section-image">
                     </div>
                 </div>
             </div>
         </section>
-
-        <!-- Section 7: Works Cited -->
-        <section id="works-cited" class="mb-16 opacity-0 transform translate-y-4 transition-all duration-700" data-section>
-            <h2 class="text-3xl font-bold mb-6 text-blue-900">Works Cited</h2>
+        
+        <!-- Section: Image Sources -->
+        <section id="sources" class="mb-16 opacity-0 transform translate-y-4 transition-all duration-700" data-section>
+            <h2 class="text-3xl font-bold mb-6 text-blue-900 flex items-center">
+                <i class="fas fa-camera mr-3 text-purple-600 scroll-icon" data-icon="camera"></i>
+                Image Sources
+            </h2>
             <div class="bg-white rounded-lg shadow-md p-6">
-                <p>Hercules. Directed by John Musker and Ron Clements, Walt Disney Pictures, 1997.</p>
-                <p class="mt-2">Additional mythological sources and academic references would be listed here.</p>
+                <p class="mb-6 text-sm text-gray-500 italic">All images are used for educational purposes. Below are the sources for all images used in this project.</p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-blue-800">Classical Sources</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <img src="images/hercules_origin.jpg" alt="Birth of Herakles" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">Birth of Herakles</p>
+                                    <p class="text-sm text-gray-600">Ancient Greek vase painting, depicting the birth of Herakles, ca. 5th century BCE.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <img src="images/hercules_and_hydra.jpg" alt="Hercules and the Hydra" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">Hercules and the Hydra</p>
+                                    <p class="text-sm text-gray-600">Metropolitan Museum of Art, ca. 525-520 BCE. Attic black-figured lekythos, attributed to the Diosphos Painter.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <img src="images/hercules_lion.jpeg" alt="Hercules and the Nemean Lion" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">Hercules and the Nemean Lion</p>
+                                    <p class="text-sm text-gray-600">Metropolitan Museum of Art, ca. 540-530 BCE. Attic black-figured amphora.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <img src="images/hercules_hydra_vase.jpeg" alt="Hercules and the Hydra vase" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">Hercules and the Hydra (Vase Painting)</p>
+                                    <p class="text-sm text-gray-600">Caeretan black-figure hydria, ca. 525 BCE. Louvre Museum.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <img src="images/hercules_nessus.png" alt="Hercules and Nessus" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">Hercules and Nessus</p>
+                                    <p class="text-sm text-gray-600">Attic black-figure amphora, ca. 580 BCE. Staatliche Antikensammlungen, Munich.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <img src="images/hercules_12_labors.jpg" alt="Twelve Labors" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">The Twelve Labors</p>
+                                    <p class="text-sm text-gray-600">Greek mosaic depicting Herakles and several of his labors, Roman period, ca. 3rd century CE.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <img src="images/hercules_megara.jpg" alt="Hercules and Megara" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">Megara</p>
+                                    <p class="text-sm text-gray-600">Classical depiction of Megara, Herakles' first wife. Roman fresco, 1st century CE.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <img src="images/hercules_apotheosis.png" alt="Herakles Apotheosis" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">The Apotheosis of Hercules</p>
+                                    <p class="text-sm text-gray-600">Ancient Greek vase painting depicting Herakles' apotheosis and reception on Mount Olympus, ca. 480-470 BCE.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold mb-4 text-blue-800">Disney Sources</h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <div class="w-16 h-16 bg-blue-100 rounded mr-3 flex items-center justify-center">
+                                    <i class="fas fa-film text-2xl text-blue-500"></i>
+                                </div>
+                                <div>
+                                    <p class="font-medium">Hercules (1997)</p>
+                                    <p class="text-sm text-gray-600">© 1997 Walt Disney Pictures. Directed by John Musker and Ron Clements.</p>
+                                    <p class="text-sm text-gray-600">All Disney images are from this film and are used for educational purposes under fair use.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <img src="images/disney_hercules_movie_poster.jpg" alt="Hercules Movie Poster" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">Hercules Movie Poster</p>
+                                    <p class="text-sm text-gray-600">© 1997 Walt Disney Pictures. Official theatrical release poster for Disney's Hercules.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <img src="images/disney_hercules_origins_2.jpg" alt="Disney Baby Hercules" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">Baby Hercules</p>
+                                    <p class="text-sm text-gray-600">© 1997 Walt Disney Pictures. Film still showing baby Hercules on Mount Olympus.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <img src="images/disney_hercules_nessus.webp" alt="Disney Hercules and Nessus" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">Hercules vs. Nessus</p>
+                                    <p class="text-sm text-gray-600">© 1997 Walt Disney Pictures. Film still from Disney's Hercules.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <img src="images/disney_hercules_megara.webp" alt="Disney Megara" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">Megara</p>
+                                    <p class="text-sm text-gray-600">© 1997 Walt Disney Pictures. Film still of Megara from Disney's Hercules.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <img src="images/disney_hera_hercules.jpeg" alt="Disney Hera" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">Hera and Baby Hercules</p>
+                                    <p class="text-sm text-gray-600">© 1997 Walt Disney Pictures. Film still showing Hera with baby Hercules.</p>
+                                </div>
+                            </li>
+                            <li class="flex items-start">
+                                <img src="images/disney_herculess_apotheosis.avif" alt="Disney Hercules Apotheosis" class="w-16 h-16 object-cover rounded mr-3">
+                                <div>
+                                    <p class="font-medium">Hercules' Apotheosis</p>
+                                    <p class="text-sm text-gray-600">© 1997 Walt Disney Pictures. Film still showing Hercules' transformation into a god.</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+                    <h3 class="font-bold mb-2">Fair Use Statement</h3>
+                    <p class="text-sm">This project uses copyrighted material for educational purposes under the fair use doctrine. All images remain the property of their respective owners and copyright holders.</p>
+                </div>
             </div>
         </section>
     </main>
@@ -920,10 +1659,207 @@
         <div class="container mx-auto px-4 text-center">
             <p>Classical Mythology Reception Project</p>
             <p>CLAS2220H</p>
-            <p>2024</p>
+            <p>2025 Mihir Joshi</p>
         </div>
     </footer>
 
+    <!-- Comparison Modal -->
+    <div class="comparison-modal" id="comparisonModal">
+        <div class="comparison-modal-content">
+            <div class="comparison-modal-close" id="closeModalBtn">
+                <i class="fas fa-times"></i>
+            </div>
+            <h2 class="text-2xl font-bold mb-6 text-center text-blue-900" id="modalTitle">Comparison</h2>
+            
+            <!-- Comparison Tabs -->
+            <div class="comparison-tabs">
+                <div class="comparison-tab" data-tab="origins">Origins</div>
+                <div class="comparison-tab" data-tab="hera">Hera's Role</div>
+                <div class="comparison-tab" data-tab="labors">The Twelve Labors</div>
+                <div class="comparison-tab" data-tab="megara">Megara</div>
+                <div class="comparison-tab" data-tab="nessus">Nessus</div>
+            </div>
+            
+            <!-- Origins View -->
+            <div class="comparison-view" id="origins-view">
+                <div class="comparison-sides">
+                    <div class="myth-side">
+                        <h3 class="text-xl font-bold mb-4 text-blue-800">Classical Myth</h3>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p>In the classical myth, Herakles is born a demigod, son of Zeus and the mortal woman Alcmene. Zeus deceived Alcmene by taking the form of her husband Amphitryon.</p>
+                            <p class="mt-3">Hera, Zeus' wife, was jealous of Zeus' infidelity and tried to kill the infant Herakles by sending two serpents to his crib. The baby Herakles demonstrated his divine strength by strangling the snakes, foreshadowing his future as a hero.</p>
+                            <div class="mt-4">
+                                <img src="images/hercules_origin.jpg" alt="Birth of Herakles" class="rounded-lg mx-auto max-h-64 object-contain">
+                                <p class="mt-2 text-sm text-gray-600 text-center">Classical depiction of Herakles' birth story</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="disney-side">
+                        <h3 class="text-xl font-bold mb-4 text-purple-700">Disney Adaptation</h3>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p>Disney completely reimagines Hercules' origins. In the film, Hercules is born a full god on Mount Olympus to Zeus and Hera who are portrayed as loving parents.</p>
+                            <p class="mt-3">Hades, fearing that Hercules will disrupt his plans to overthrow Zeus, sends his minions Pain and Panic to kidnap baby Hercules and make him mortal with a magic potion. The transformation is incomplete, leaving Hercules with his godlike strength but as a mortal who must earn his divinity.</p>
+                            <div class="mt-4">
+                                <img src="images/disney_hercules_origins_2.jpg" alt="Baby Hercules" class="rounded-lg mx-auto max-h-64 object-contain">
+                                <p class="mt-2 text-sm text-gray-600 text-center">Disney's depiction of baby Hercules</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Hera View -->
+            <div class="comparison-view" id="hera-view">
+                <div class="comparison-sides">
+                    <div class="myth-side">
+                        <h3 class="text-xl font-bold mb-4 text-blue-800">Classical Myth</h3>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p>In Greek mythology, Hera is Herakles' nemesis and antagonist. Her hatred stems from Zeus' affair with Alcmene, Herakles' mother.</p>
+                            <p class="mt-3">She tried to kill Herakles as an infant by sending serpents to his crib. Later in his life, she drove him temporarily mad, causing him to murder his own wife Megara and their children, which led to his penance of the Twelve Labors.</p>
+                            <p class="mt-3">Throughout his life, Hera continued to persecute Herakles and place obstacles in his path.</p>
+                            <div class="mt-4">
+                                <img src="images/hercules_origin.jpg" alt="Hera and Hercules myth" class="rounded-lg mx-auto max-h-64 object-contain">
+                                <p class="mt-2 text-sm text-gray-600 text-center">Classical art depicting the antagonistic relationship</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="disney-side">
+                        <h3 class="text-xl font-bold mb-4 text-purple-700">Disney Adaptation</h3>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p>Disney's portrayal of Hera is dramatically different. She is shown as Hercules' loving mother and Zeus' devoted wife.</p>
+                            <p class="mt-3">In the film, Hera welcomes baby Hercules at his birth celebration on Mount Olympus and is distraught when he is kidnapped. When Hercules finally achieves godhood and returns to Olympus, Hera joyfully welcomes him home.</p>
+                            <p class="mt-3">This change removes the central conflict of the original myth and shifts the antagonist role entirely to Hades.</p>
+                            <div class="mt-4">
+                                <img src="images/disney_hera_hercules.jpeg" alt="Disney's Hera" class="rounded-lg mx-auto max-h-64 object-contain">
+                                <p class="mt-2 text-sm text-gray-600 text-center">Disney's portrayal of Hera as a loving mother</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Labors View -->
+            <div class="comparison-view" id="labors-view">
+                <div class="comparison-sides">
+                    <div class="myth-side">
+                        <h3 class="text-xl font-bold mb-4 text-blue-800">Classical Myth</h3>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p>In classical mythology, the Twelve Labors are central to Herakles' story. After killing his family in a madness sent by Hera, Herakles had to complete twelve nearly impossible tasks as penance and purification.</p>
+                            <p class="mt-3">These included slaying the Nemean Lion, defeating the nine-headed Hydra, capturing Cerberus from the underworld, and other extraordinary feats. Each labor tested his strength, cunning, and determination, establishing him as the greatest hero of Greek mythology.</p>
+                            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <img src="images/hercules_12_labors.jpg" alt="Twelve Labors" class="rounded-lg mx-auto max-h-64 object-contain">
+                                    <p class="mt-2 text-sm text-gray-600 text-center">Artwork depicting the Twelve Labors</p>
+                                </div>
+                                <div>
+                                    <img src="images/hercules_and_hydra.jpg" alt="Hercules and Hydra" class="rounded-lg mx-auto max-h-64 object-contain">
+                                    <p class="mt-2 text-sm text-gray-600 text-center">Classical depiction of the battle with the Hydra</p>
+                                </div>
+                            </div>
+                            <div class="mt-4 p-4 bg-blue-50 rounded-lg">
+                                <h4 class="font-bold mb-2">The Twelve Labors:</h4>
+                                <ol class="list-decimal pl-5 space-y-1 text-sm">
+                                    <li>Slay the Nemean Lion</li>
+                                    <li>Slay the Lernaean Hydra</li>
+                                    <li>Capture the Ceryneian Hind</li>
+                                    <li>Capture the Erymanthian Boar</li>
+                                    <li>Clean the Augean Stables</li>
+                                    <li>Defeat the Stymphalian Birds</li>
+                                    <li>Capture the Cretan Bull</li>
+                                    <li>Steal the Mares of Diomedes</li>
+                                    <li>Obtain the Girdle of Hippolyta</li>
+                                    <li>Steal the Cattle of Geryon</li>
+                                    <li>Steal the Apples of the Hesperides</li>
+                                    <li>Capture Cerberus</li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="disney-side">
+                        <h3 class="text-xl font-bold mb-4 text-purple-700">Disney Adaptation</h3>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p>Disney simplifies this crucial element of the myth. The film transforms the formal structure of the Twelve Labors into a training montage and a series of heroic acts that Hercules performs to gain fame.</p>
+                            <p class="mt-3">While Hercules does battle the Hydra (which grows multiple heads like in the myth), the other labors are either omitted or briefly referenced. The context is also completely different - rather than performing these deeds as penance for a terrible crime, Disney's Hercules does them to prove himself a true hero and regain his godhood.</p>
+                            <div class="mt-4">
+                                <img src="images/disney_hercules_training.jpg" alt="Hercules fighting Hydra" class="rounded-lg mx-auto max-h-64 object-contain">
+                                <p class="mt-2 text-sm text-gray-600 text-center">Disney's training montage and heroic acts</p>
+                            </div>
+                            <div class="mt-4 p-4 bg-purple-50 rounded-lg">
+                                <h4 class="font-bold mb-2">Disney's Approach:</h4>
+                                <ul class="list-disc pl-5 space-y-1 text-sm">
+                                    <li>Replaces formal labors with a training montage</li>
+                                    <li>Focuses on the Hydra as a major challenge</li>
+                                    <li>Changes motivation from atonement to proving worthiness</li>
+                                    <li>Uses Phil (Philoctetes) as a trainer figure</li>
+                                    <li>Incorporates heroism into a narrative of fame and self-discovery</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Megara View -->
+            <div class="comparison-view" id="megara-view">
+                <div class="comparison-sides">
+                    <div class="myth-side">
+                        <h3 class="text-xl font-bold mb-4 text-blue-800">Classical Myth</h3>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p>In Greek mythology, Megara was the daughter of King Creon of Thebes. She was given to Herakles as a bride after he helped defend Thebes.</p>
+                            <p class="mt-3">Their relationship ended in tragedy when Hera drove Herakles mad, causing him to murder Megara and their children. This horrific act led to Herakles being assigned the Twelve Labors as penance.</p>
+                            <p class="mt-3">After completing his labors, Herakles gave Megara to his nephew Iolaus and remarried. Her role in the myth is primarily as a victim of divine vengeance.</p>
+                            <div class="mt-4">
+                                <img src="images/hercules_megara.jpg" alt="Megara in Classical Art" class="rounded-lg mx-auto max-h-64 object-contain">
+                                <p class="mt-2 text-sm text-gray-600 text-center">Classical depiction of Megara</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="disney-side">
+                        <h3 class="text-xl font-bold mb-4 text-purple-700">Disney Adaptation</h3>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p>Disney completely reimagines Megara's character. In the film, 'Meg' is depicted as a witty, independent woman who sold her soul to Hades and becomes Hercules' love interest.</p>
+                            <p class="mt-3">She initially works for Hades and is tasked with discovering Hercules' weakness. However, she gradually falls in love with Hercules and eventually helps him, despite her deal with Hades.</p>
+                            <p class="mt-3">Unlike her mythological counterpart, Disney's Meg has agency, a complex personality, and a redemptive arc. The film concludes with her and Hercules in a happy relationship - a complete reversal of the tragic myth.</p>
+                            <div class="mt-4">
+                                <img src="images/disney_hercules_megara.webp" alt="Disney's Megara" class="rounded-lg mx-auto max-h-64 object-contain">
+                                <p class="mt-2 text-sm text-gray-600 text-center">Disney's reimagined Megara</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Nessus View -->
+            <div class="comparison-view" id="nessus-view">
+                <div class="comparison-sides">
+                    <div class="myth-side">
+                        <h3 class="text-xl font-bold mb-4 text-blue-800">Classical Myth</h3>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p>In Greek mythology, Nessus was a centaur who played a pivotal role in Herakles' death. After Herakles married Deianeira, they encountered Nessus at a river. Nessus offered to carry Deianeira across but then tried to rape her.</p>
+                            <p class="mt-3">Herakles shot Nessus with a poisoned arrow. As he died, Nessus tricked Deianeira by telling her his blood would ensure Herakles' faithfulness. Later, believing Herakles was unfaithful, Deianeira gave him a robe soaked in Nessus' blood, which caused Herakles unbearable pain and led to his death and apotheosis.</p>
+                            <div class="mt-4">
+                                <img src="images/hercules_nessus.png" alt="Hercules and Nessus" class="rounded-lg mx-auto max-h-64 object-contain">
+                                <p class="mt-2 text-sm text-gray-600 text-center">Classical depiction of Hercules and Nessus</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="disney-side">
+                        <h3 class="text-xl font-bold mb-4 text-purple-700">Disney Adaptation</h3>
+                        <div class="p-4 bg-gray-50 rounded-lg">
+                            <p>Disney transforms Nessus into a minor character and comic relief. In the film, Nessus appears as a brutish centaur harassing Megara, giving Hercules an opportunity to demonstrate his strength and heroism by rescuing her.</p>
+                            <p class="mt-3">The complex and tragic story involving Nessus, Deianeira, and Herakles' death is completely omitted. Instead, Nessus simply serves as an obstacle for Hercules to overcome and a catalyst for his meeting with Megara.</p>
+                            <p class="mt-3">This change removes one of the most tragic elements of the Herakles myth and fits the more lighthearted tone of the Disney film.</p>
+                            <div class="mt-4">
+                                <img src="images/disney_hercules_nessus.webp" alt="Disney's Nessus" class="rounded-lg mx-auto max-h-64 object-contain">
+                                <p class="mt-2 text-sm text-gray-600 text-center">Disney's depiction of Nessus as comic relief</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script>
         // Initialize Swiper
         const swipers = document.querySelectorAll('.swiper');
@@ -970,27 +1906,34 @@
             const totalHeight = document.body.scrollHeight - window.innerHeight;
             const scrollPercentage = (scrollPos / totalHeight) * 100;
             
-            // Update the main progress bar
-            document.querySelectorAll('.theme-tracker-progress').forEach(tracker => {
-                // Get the width from the style if it exists, otherwise use default values
-                const trackerWidth = tracker.style.width;
-                const targetWidth = trackerWidth ? parseInt(trackerWidth) : 100;
-                const calculatedWidth = Math.min(scrollPercentage, targetWidth);
-                tracker.style.width = calculatedWidth + '%';
-            });
+            // Update the vertical progress bar
+            document.querySelector('.theme-tracker-progress-vertical').style.height = scrollPercentage + '%';
             
             // Highlight theme markers based on scroll position
-            const themeMarkers = document.querySelectorAll('.theme-marker');
+            const themeMarkers = document.querySelectorAll('.theme-marker-vertical');
             themeMarkers.forEach(marker => {
-                const markerPos = parseFloat(marker.style.left);
-                if (scrollPercentage >= markerPos - 10) {
-                    marker.classList.add('bg-blue-700', 'text-white');
-                    marker.classList.add('scale-110');
-                    marker.style.transition = 'all 0.3s ease';
+                const markerPos = parseFloat(marker.style.top);
+                const dot = marker.querySelector('.theme-dot');
+                const label = marker.querySelector('span');
+                
+                if (scrollPercentage >= markerPos - 5) {
+                    dot.classList.add('bg-blue-700');
+                    dot.classList.remove('bg-gray-300');
+                    label.classList.add('bg-blue-700', 'text-white');
+                    label.classList.remove('bg-gray-200', 'text-gray-700');
+                    // Make label visible for active marker
+                    label.style.opacity = '1';
+                    label.style.transform = 'translateX(0)';
+                    label.style.visibility = 'visible';
                 } else {
-                    marker.classList.remove('bg-blue-700', 'text-white');
-                    marker.classList.add('bg-gray-200', 'text-gray-700');
-                    marker.classList.remove('scale-110');
+                    dot.classList.remove('bg-blue-700');
+                    dot.classList.add('bg-gray-300');
+                    label.classList.remove('bg-blue-700', 'text-white');
+                    label.classList.add('bg-gray-200', 'text-gray-700');
+                    // Hide label for inactive markers
+                    label.style.opacity = '0';
+                    label.style.transform = 'translateX(-10px)';
+                    label.style.visibility = 'hidden';
                 }
             });
         }
@@ -1043,17 +1986,39 @@
         const comparisonToggle = document.getElementById('comparisonToggle');
         if (comparisonToggle) {
             comparisonToggle.addEventListener('change', function() {
-                const mythSides = document.querySelectorAll('.myth-side');
-                const disneySides = document.querySelectorAll('.disney-side');
+                const mythPanels = document.querySelectorAll('.myth-panel');
+                const disneyPanels = document.querySelectorAll('.disney-panel');
+                const mythLabel = document.getElementById('mythLabel');
+                const disneyLabel = document.getElementById('disneyLabel');
                 
                 if (this.checked) {
                     // Show Disney side
-                    mythSides.forEach(side => side.classList.add('opacity-50'));
-                    disneySides.forEach(side => side.classList.remove('opacity-50'));
+                    mythPanels.forEach(panel => {
+                        panel.style.transform = 'translateX(-100%)';
+                    });
+                    disneyPanels.forEach(panel => {
+                        panel.style.transform = 'translateX(0)';
+                    });
+                    
+                    // Update labels
+                    mythLabel.classList.remove('text-gray-600', 'font-bold');
+                    mythLabel.classList.add('text-gray-400');
+                    disneyLabel.classList.remove('text-gray-400');
+                    disneyLabel.classList.add('text-blue-600', 'font-bold');
                 } else {
                     // Show Myth side
-                    mythSides.forEach(side => side.classList.remove('opacity-50'));
-                    disneySides.forEach(side => side.classList.add('opacity-50'));
+                    mythPanels.forEach(panel => {
+                        panel.style.transform = 'translateX(0)';
+                    });
+                    disneyPanels.forEach(panel => {
+                        panel.style.transform = 'translateX(100%)';
+                    });
+                    
+                    // Update labels
+                    mythLabel.classList.remove('text-gray-400');
+                    mythLabel.classList.add('text-gray-600', 'font-bold');
+                    disneyLabel.classList.remove('text-blue-600', 'font-bold');
+                    disneyLabel.classList.add('text-gray-400');
                 }
             });
         }
@@ -1082,9 +2047,26 @@
                         const otherIcon = otherButton.querySelector('.fa-chevron-down');
                         otherContent.classList.remove('open');
                         otherContent.style.maxHeight = 0;
-                        otherIcon.style.transform = 'rotate(0)';
+                        if (otherIcon) otherIcon.style.transform = 'rotate(0)';
                     }
                 });
+            });
+        });
+        
+        // Card expand/collapse functionality
+        const cardHeaders = document.querySelectorAll('.card-header');
+        cardHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const content = this.nextElementSibling;
+                const icon = this.querySelector('i');
+                
+                content.classList.toggle('expanded');
+                
+                if (content.classList.contains('expanded')) {
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    icon.style.transform = 'rotate(0)';
+                }
             });
         });
         
@@ -1137,15 +2119,372 @@
                 navLinks[0].classList.add('active');
             }
             
+            // Initialize comparison toggle state
+            const comparisonToggle = document.getElementById('comparisonToggle');
+            if (comparisonToggle) {
+                // Default to unchecked (Classical Myth)
+                comparisonToggle.checked = false;
+                
+                // Make sure initial panel visibility is correct
+                const mythPanels = document.querySelectorAll('.myth-panel');
+                const disneyPanels = document.querySelectorAll('.disney-panel');
+                
+                mythPanels.forEach(panel => {
+                    panel.style.transform = 'translateX(0)';
+                });
+                disneyPanels.forEach(panel => {
+                    panel.style.transform = 'translateX(100%)';
+                });
+                
+                // Ensure labels have correct styling
+                const mythLabel = document.getElementById('mythLabel');
+                const disneyLabel = document.getElementById('disneyLabel');
+                
+                mythLabel.classList.remove('text-gray-400');
+                mythLabel.classList.add('text-gray-600', 'font-bold');
+                disneyLabel.classList.remove('text-blue-600', 'font-bold');
+                disneyLabel.classList.add('text-gray-400');
+            }
+            
             // Initialize theme markers with proper styling
-            const themeMarkers = document.querySelectorAll('.theme-marker');
+            const themeMarkers = document.querySelectorAll('.theme-marker-vertical');
             themeMarkers.forEach((marker, index) => {
                 if (index === 0) {
-                    marker.classList.add('bg-blue-700', 'text-white');
-                } else {
-                    marker.classList.add('bg-gray-200', 'text-gray-700');
+                    const dot = marker.querySelector('.theme-dot');
+                    const label = marker.querySelector('span');
+                    dot.classList.add('bg-blue-700');
+                    dot.classList.remove('bg-gray-300');
+                    label.classList.add('bg-blue-700', 'text-white');
+                    label.classList.remove('bg-gray-200', 'text-gray-700');
+                    // Show the first label by default
+                    label.style.opacity = '1';
+                    label.style.transform = 'translateX(0)';
+                    label.style.visibility = 'visible';
                 }
             });
+            
+            // Open the first card in the comparison section
+            const firstCard = document.querySelector('.info-card');
+            if (firstCard) {
+                const firstCardContent = firstCard.querySelector('.card-content');
+                const firstCardIcon = firstCard.querySelector('.card-header i');
+                firstCardContent.classList.add('expanded');
+                if (firstCardIcon) firstCardIcon.style.transform = 'rotate(180deg)';
+            }
+            
+            // Open the first FAQ
+            const firstAccordion = document.querySelector('.accordion-button');
+            if (firstAccordion) {
+                firstAccordion.click();
+            }
+            
+            // Set the first comparison tab as active by default
+            const firstTab = document.querySelector('.comparison-tab');
+            if (firstTab) {
+                activateComparisonTab(firstTab);
+            }
+        });
+
+        // Handle section clickability for comparison
+        const sectionComparisons = {
+            "source": {
+                title: "Classical Origins vs. Disney Reimagining",
+                myth: {
+                    text: "<p>In classical mythology, Herakles (Roman: Hercules) was born from Zeus' affair with the mortal woman Alcmene. Hera, Zeus' wife, was jealous and tried to kill the infant by sending snakes to his crib. Herakles strangled the snakes, demonstrating his divine strength.</p><p>Later in life, Hera drove Herakles mad, causing him to kill his own wife and children. As atonement, he had to complete the Twelve Labors, which included slaying the Nemean Lion, defeating the Hydra, and other impossible tasks. His life was filled with tragedy and heroism, and after his death on a funeral pyre, he achieved apotheosis (becoming a god) through his suffering.</p>",
+                    images: [
+                        {src: "images/hercules_origin.jpg", alt: "Birth of Herakles", caption: "Classical depiction of Herakles' early life"},
+                        {src: "images/hercules_12_labors.jpg", alt: "The Twelve Labors", caption: "Artwork depicting the Twelve Labors"}
+                    ]
+                },
+                disney: {
+                    text: "<p>Disney drastically reimagines Hercules' origin. Born on Mount Olympus to Zeus and Hera (presented as loving parents), baby Hercules is kidnapped by Hades' minions and made mortal, though he retains his superhuman strength. The film positions Hades as the primary antagonist rather than Hera.</p><p>The movie transforms the Twelve Labors into a montage of heroic deeds as Hercules trains with the satyr Philoctetes. There is no tragic murder of his family. Instead of earning godhood through suffering, Disney's Hercules achieves his apotheosis through selfless sacrifice, choosing to save Meg's soul from the Underworld.</p>",
+                    images: [
+                        {src: "images/disney_hercules_snakes.jpg", alt: "Disney's Hercules with snakes", caption: "Disney's baby Hercules defeating snakes"},
+                        {src: "images/disney_herculess_apotheosis.avif", alt: "Disney's Apotheosis", caption: "Disney's version of apotheosis"}
+                    ]
+                }
+            },
+            "comparison": {
+                title: "Character Comparisons",
+                myth: {
+                    text: "<p>In Greek mythology, Hera is Hercules' antagonist, constantly trying to kill or harm him throughout his life. The real Megara was given to Hercules after his labor for King Creon. Their relationship ended in tragedy when Hera drove Hercules mad, causing him to kill Megara and their children.</p><p>The Twelve Labors were imposed as penance for this horrific crime. The gods in mythology are portrayed as petty, jealous, and deeply flawed beings who frequently intervene in mortal affairs for their own interests.</p>",
+                    images: [
+                        {src: "images/hercules_and_hydra.jpg", alt: "Hercules and the Hydra", caption: "Classical Hercules fighting the Hydra"},
+                        {src: "images/hercules_lion.jpeg", alt: "Hercules and the Nemean Lion", caption: "Hercules with the Nemean Lion"}
+                    ]
+                },
+                disney: {
+                    text: "<p>Disney completely reimagines these relationships. Hera becomes a loving mother, while Hades takes the role of antagonist. Megara is transformed into a clever, independent woman who initially works for Hades but falls in love with Hercules. There's no tragic ending to their love story.</p><p>The film uses Phil (Philoctetes) as a trainer figure and comic relief, though in mythology he was a separate hero. Disney's gods are more like a loving family with only Hades portrayed as truly villainous, making the story more accessible and less morally complex for a family audience.</p>",
+                    images: [
+                        {src: "images/disney_hercules_nessus.webp", alt: "Disney's Hercules and Nessus", caption: "Disney's Hercules fighting Nessus"},
+                        {src: "images/disney_hercules_megara.webp", alt: "Disney's Megara", caption: "Disney's reimagined Megara"}
+                    ]
+                }
+            },
+            "adaptation": {
+                title: "Adaptation & Change",
+                myth: {
+                    text: "<p>In classical mythology, apotheosis (becoming a god) is achieved through suffering. Hercules' apotheosis occurs after his death on the funeral pyre, where his mortal parts are burned away and his divine essence ascends to Olympus. This transformation comes after a life filled with tragedy, violence, and struggle.</p><p>The classical myth emphasizes how even a demigod must endure hardship and that suffering can lead to transcendence. The tone is often tragic and complex.</p>",
+                    images: [
+                        {src: "images/hercules_apotheosis.png", alt: "Classical Apotheosis", caption: "Classical depiction of Herakles' apotheosis"},
+                        {src: "images/hercules_nessus.png", alt: "Hercules and Nessus", caption: "Classical depiction of Nessus"}
+                    ]
+                },
+                disney: {
+                    text: "<p>Disney transforms the concept of apotheosis into a reward for selfless moral choice. Hercules achieves godhood by willingly sacrificing his life to save Megara's soul from the Underworld. This selfless act proves him a 'true hero' and restores his godhood.</p><p>This shift reflects modern values of selflessness and moral choice over the ancient Greek emphasis on suffering and fate. The tone is uplifting and optimistic, characteristic of Disney's family-friendly approach.</p>",
+                    images: [
+                        {src: "images/disney_herculess_apotheosis.avif", alt: "Disney's Apotheosis", caption: "Disney's version of apotheosis"},
+                        {src: "images/disney_hera_hercules.jpeg", alt: "Disney's Hera", caption: "Disney's depiction of Hera with baby Hercules"}
+                    ]
+                }
+            },
+            "conclusion": {
+                title: "Concluding Thoughts",
+                myth: {
+                    text: "<p>The ancient Herakles myth emphasizes a hero who achieves greatness despite (or because of) tremendous suffering. His story explores themes of atonement, divine punishment, and the complex relationship between mortals and gods.</p><p>The classical reception embraces moral complexity and doesn't shy away from the darker aspects of human experience, including violence, madness, and tragedy.</p>",
+                    images: [
+                        {src: "images/hercules_origin.jpg", alt: "Hercules Origin", caption: "Classical mythology depicted in ancient art"}
+                    ]
+                },
+                disney: {
+                    text: "<p>Disney's adaptation transforms the myth into an uplifting coming-of-age story about finding where you belong and making moral choices. The film emphasizes themes of identity, selflessness, and chosen family.</p><p>Through these adaptations, Disney introduces classical mythology to a new generation in an accessible way, reflecting both the enduring power of ancient stories and how they can be reinterpreted to reflect contemporary values.</p>",
+                    images: [
+                        {src: "images/disney_hercules_saving_meg.jpg", alt: "Hercules saving Meg", caption: "Hercules' selfless sacrifice to save Megara"}
+                    ]
+                }
+            },
+            // Add individual card comparisons
+            "origins": {
+                title: "Origin Story Comparison",
+                myth: {
+                    text: "<p>In the classical myth, Herakles is born a demigod, son of Zeus and the mortal woman Alcmene. Zeus deceived Alcmene by taking the form of her husband Amphitryon.</p><p>Hera, Zeus' wife, was jealous of Zeus' infidelity and tried to kill the infant Herakles by sending two serpents to his crib. The baby Herakles demonstrated his divine strength by strangling the snakes, foreshadowing his future as a hero.</p>",
+                    images: [
+                        {src: "images/hercules_origin.jpg", alt: "Birth of Herakles", caption: "Classical depiction of Herakles' birth story"}
+                    ]
+                },
+                disney: {
+                    text: "<p>Disney completely reimagines Hercules' origins. In the film, Hercules is born a full god on Mount Olympus to Zeus and Hera who are portrayed as loving parents.</p><p>Hades, fearing that Hercules will disrupt his plans to overthrow Zeus, sends his minions Pain and Panic to kidnap baby Hercules and make him mortal with a magic potion. The transformation is incomplete, leaving Hercules with his godlike strength but as a mortal who must earn his divinity.</p>",
+                    images: [
+                        {src: "images/disney_hercules_origins_2.jpg", alt: "Baby Hercules", caption: "Disney's depiction of baby Hercules"}
+                    ]
+                }
+            },
+            "hera": {
+                title: "Hera's Role Comparison",
+                myth: {
+                    text: "<p>In Greek mythology, Hera is Herakles' nemesis and antagonist. Her hatred stems from Zeus' affair with Alcmene, Herakles' mother.</p><p>She tried to kill Herakles as an infant by sending serpents to his crib. Later in his life, she drove him temporarily mad, causing him to murder his own wife Megara and their children, which led to his penance of the Twelve Labors.</p><p>Throughout his life, Hera continued to persecute Herakles and place obstacles in his path.</p>",
+                    images: [
+                        {src: "images/hercules_origin.jpg", alt: "Hera and Hercules myth", caption: "Classical art depicting the antagonistic relationship"}
+                    ]
+                },
+                disney: {
+                    text: "<p>Disney's portrayal of Hera is dramatically different. She is shown as Hercules' loving mother and Zeus' devoted wife.</p><p>In the film, Hera welcomes baby Hercules at his birth celebration on Mount Olympus and is distraught when he is kidnapped. When Hercules finally achieves godhood and returns to Olympus, Hera joyfully welcomes him home.</p><p>This change removes the central conflict of the original myth and shifts the antagonist role entirely to Hades.</p>",
+                    images: [
+                        {src: "images/disney_hera_hercules.jpeg", alt: "Disney's Hera", caption: "Disney's portrayal of Hera as a loving mother"}
+                    ]
+                }
+            },
+            "labors": {
+                title: "The Twelve Labors Comparison",
+                myth: {
+                    text: "<p>In classical mythology, the Twelve Labors are central to Herakles' story. After killing his family in a madness sent by Hera, Herakles had to complete twelve nearly impossible tasks as penance and purification.</p><p>These included slaying the Nemean Lion, defeating the nine-headed Hydra, capturing Cerberus from the underworld, and other extraordinary feats. Each labor tested his strength, cunning, and determination, establishing him as the greatest hero of Greek mythology.</p>",
+                    images: [
+                        {src: "images/hercules_12_labors.jpg", alt: "Twelve Labors", caption: "Artwork depicting the Twelve Labors"},
+                        {src: "images/hercules_and_hydra.jpg", alt: "Hercules and Hydra", caption: "Classical depiction of the battle with the Hydra"}
+                    ]
+                },
+                disney: {
+                    text: "<p>Disney simplifies this crucial element of the myth. The film transforms the formal structure of the Twelve Labors into a training montage and a series of heroic acts that Hercules performs to gain fame.</p><p>While Hercules does battle the Hydra (which grows multiple heads like in the myth), the other labors are either omitted or briefly referenced. The context is also completely different - rather than performing these deeds as penance for a terrible crime, Disney's Hercules does them to prove himself a true hero and regain his godhood.</p>",
+                    images: [
+                        {src: "images/disney_hercules_training.jpg", alt: "Hercules fighting Hydra", caption: "Disney's training montage and heroic acts"}
+                    ]
+                }
+            },
+            "megara": {
+                title: "Megara Comparison",
+                myth: {
+                    text: "<p>In Greek mythology, Megara was the daughter of King Creon of Thebes. She was given to Herakles as a bride after he helped defend Thebes.</p><p>Their relationship ended in tragedy when Hera drove Herakles mad, causing him to murder Megara and their children. This horrific act led to Herakles being assigned the Twelve Labors as penance.</p><p>After completing his labors, Herakles gave Megara to his nephew Iolaus and remarried. Her role in the myth is primarily as a victim of divine vengeance.</p>",
+                    images: [
+                        {src: "images/hercules_megara.jpg", alt: "Megara in Classical Art", caption: "Classical depiction of Megara"}
+                    ]
+                },
+                disney: {
+                    text: "<p>Disney completely reimagines Megara's character. In the film, 'Meg' is depicted as a witty, independent woman who sold her soul to Hades to save a boyfriend who then abandoned her.</p><p>She initially works for Hades and is tasked with discovering Hercules' weakness. However, she gradually falls in love with Hercules and eventually helps him, despite her deal with Hades.</p><p>Unlike her mythological counterpart, Disney's Meg has agency, a complex personality, and a redemptive arc. The film concludes with her and Hercules in a happy relationship - a complete reversal of the tragic myth.</p>",
+                    images: [
+                        {src: "images/disney_hercules_megara.webp", alt: "Disney's Megara", caption: "Disney's reimagined Megara"}
+                    ]
+                }
+            },
+            "nessus": {
+                title: "Nessus Comparison",
+                myth: {
+                    text: "<p>In Greek mythology, Nessus was a centaur who played a pivotal role in Herakles' death. After Herakles married Deianeira, they encountered Nessus at a river. Nessus offered to carry Deianeira across but then tried to rape her.</p><p>Herakles shot Nessus with a poisoned arrow. As he died, Nessus tricked Deianeira by telling her his blood would ensure Herakles' faithfulness. Later, believing Herakles was unfaithful, Deianeira gave him a robe soaked in Nessus' blood, which caused Herakles unbearable pain and led to his death and apotheosis.</p>",
+                    images: [
+                        {src: "images/hercules_nessus.png", alt: "Hercules and Nessus", caption: "Classical depiction of Hercules and Nessus"}
+                    ]
+                },
+                disney: {
+                    text: "<p>Disney transforms Nessus into a minor character and comic relief. In the film, Nessus appears as a brutish centaur harassing Megara, giving Hercules an opportunity to demonstrate his strength and heroism by rescuing her.</p><p>The complex and tragic story involving Nessus, Deianeira, and Herakles' death is completely omitted. Instead, Nessus simply serves as an obstacle for Hercules to overcome and a catalyst for his meeting with Megara.</p><p>This change removes one of the most tragic elements of the Herakles myth and fits the more lighthearted tone of the Disney film.</p>",
+                    images: [
+                        {src: "images/disney_hercules_nessus.webp", alt: "Disney's Nessus", caption: "Disney's depiction of Nessus as comic relief"}
+                    ]
+                }
+            }
+        };
+        
+        // Add click event listeners to comparison cards
+        document.querySelectorAll('.comparison-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const comparisonType = card.getAttribute('data-comparison');
+                if (comparisonType) {
+                    openComparisonView(comparisonType);
+                }
+            });
+        });
+        
+        // Function to open specific comparison view
+        function openComparisonView(comparisonType) {
+            const modal = document.getElementById('comparisonModal');
+            
+            // First, activate the modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            
+            // Then, activate the appropriate tab
+            document.querySelectorAll('.comparison-tab').forEach(tab => {
+                if (tab.getAttribute('data-tab') === comparisonType) {
+                    activateComparisonTab(tab);
+                }
+            });
+        }
+        
+        // Function to activate a specific comparison tab
+        function activateComparisonTab(selectedTab) {
+            const tabId = selectedTab.getAttribute('data-tab');
+            
+            // Update tab states
+            document.querySelectorAll('.comparison-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            selectedTab.classList.add('active');
+            
+            // Show the corresponding view and hide others
+            document.querySelectorAll('.comparison-view').forEach(view => {
+                view.classList.remove('active');
+            });
+            document.getElementById(`${tabId}-view`).classList.add('active');
+        }
+        
+        // Add event listeners to comparison tabs
+        document.querySelectorAll('.comparison-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                activateComparisonTab(tab);
+            });
+        });
+        
+        // Close modal
+        document.getElementById('closeModalBtn').addEventListener('click', () => {
+            document.getElementById('comparisonModal').classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        });
+        
+        // Close modal when clicking outside content
+        document.getElementById('comparisonModal').addEventListener('click', (e) => {
+            if (e.target === document.getElementById('comparisonModal')) {
+                document.getElementById('comparisonModal').classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+        
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('comparisonModal').classList.contains('active')) {
+                document.getElementById('comparisonModal').classList.remove('active');
+                document.body.style.overflow = ''; // Restore scrolling
+            }
+        });
+
+        // Initialize the page
+        window.addEventListener('load', () => {
+            // Make sure first section is visible immediately
+            const firstSection = document.querySelector('[data-section]');
+            if (firstSection) {
+                firstSection.classList.remove('opacity-0');
+                firstSection.classList.remove('translate-y-4');
+            }
+            
+            // Initialize theme tracker
+            updateThemeTracker(window.scrollY);
+            
+            // Set first nav link as active
+            if (navLinks.length > 0) {
+                navLinks[0].classList.add('active');
+            }
+            
+            // Initialize comparison toggle state
+            const comparisonToggle = document.getElementById('comparisonToggle');
+            if (comparisonToggle) {
+                // Default to unchecked (Classical Myth)
+                comparisonToggle.checked = false;
+                
+                // Make sure initial panel visibility is correct
+                const mythPanels = document.querySelectorAll('.myth-panel');
+                const disneyPanels = document.querySelectorAll('.disney-panel');
+                
+                mythPanels.forEach(panel => {
+                    panel.style.transform = 'translateX(0)';
+                });
+                disneyPanels.forEach(panel => {
+                    panel.style.transform = 'translateX(100%)';
+                });
+                
+                // Ensure labels have correct styling
+                const mythLabel = document.getElementById('mythLabel');
+                const disneyLabel = document.getElementById('disneyLabel');
+                
+                mythLabel.classList.remove('text-gray-400');
+                mythLabel.classList.add('text-gray-600', 'font-bold');
+                disneyLabel.classList.remove('text-blue-600', 'font-bold');
+                disneyLabel.classList.add('text-gray-400');
+            }
+            
+            // Initialize theme markers with proper styling
+            const themeMarkers = document.querySelectorAll('.theme-marker-vertical');
+            themeMarkers.forEach((marker, index) => {
+                if (index === 0) {
+                    const dot = marker.querySelector('.theme-dot');
+                    const label = marker.querySelector('span');
+                    dot.classList.add('bg-blue-700');
+                    dot.classList.remove('bg-gray-300');
+                    label.classList.add('bg-blue-700', 'text-white');
+                    label.classList.remove('bg-gray-200', 'text-gray-700');
+                    // Show the first label by default
+                    label.style.opacity = '1';
+                    label.style.transform = 'translateX(0)';
+                    label.style.visibility = 'visible';
+                }
+            });
+            
+            // Open the first card in the comparison section
+            const firstCard = document.querySelector('.info-card');
+            if (firstCard) {
+                const firstCardContent = firstCard.querySelector('.card-content');
+                const firstCardIcon = firstCard.querySelector('.card-header i');
+                firstCardContent.classList.add('expanded');
+                if (firstCardIcon) firstCardIcon.style.transform = 'rotate(180deg)';
+            }
+            
+            // Open the first FAQ
+            const firstAccordion = document.querySelector('.accordion-button');
+            if (firstAccordion) {
+                firstAccordion.click();
+            }
+            
+            // Set the first comparison tab as active by default
+            const firstTab = document.querySelector('.comparison-tab');
+            if (firstTab) {
+                activateComparisonTab(firstTab);
+            }
         });
     </script>
 </body>
